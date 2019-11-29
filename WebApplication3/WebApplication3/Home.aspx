@@ -10,12 +10,11 @@
     <div class="dropdown-content">
     <div class="row">
       <div class="column">
-      <h2>Foods</h2>    
+      <h2>Foods</h2>
       <a href="#">Bars</a>
       <a href="#">Baking ingredients</a>
       <a href="#">Breakfast</a>
       <a href="#">Beef</a>
-      
     </div>
     <div class="column">
       <a href="#">Dried fruits</a>
