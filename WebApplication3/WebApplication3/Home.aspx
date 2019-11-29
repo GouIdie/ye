@@ -4,18 +4,41 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 <div class="navbar">
-<div class="not">
-  <a href="#home">Sale</a>
-  <a href="#news">News</a>
-</div>
+
+  <a class="not" href="#home">Sale</a>
   <div class="dropdown">
     <button class="dropbtn">Nutrition </button>
+    <div class="dropdown-content">
+    <div class="row">
+      <div class="column">  
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+    <div class="column">  
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+      <div class="column">  
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+       
+    </div>
+    </div>
+    </div>
+</div>
+  <div class="dropdown">
+    <button class="dropbtn">Supplements</button>
     <div class="dropdown-content">
       <a href="#">Link 1</a>
       <a href="#">Link 2</a>
       <a href="#">Link 3</a>
     </div>
-  </div> 
+  </div>
+  <a class="not" href="#news">News</a>
+
 </div>
 
 
