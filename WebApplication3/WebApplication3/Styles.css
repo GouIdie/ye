@@ -1,6 +1,15 @@
 ﻿body {
     background-color: #F8F8F8;
+    margin: 0;
+
 }
+
+.homepage {
+    color:aquamarine;
+    font-family: 'Century Gothic';
+}
+
+
 *{
     box-sizing: border-box;
 }
@@ -9,15 +18,16 @@
     font-family: 'Century Gothic';
     letter-spacing: 0.2em;
     display: flex;
-    justify-content:center;
+    justify-content: center;
+    z-index: 1;
 }
 
     .navbar h2 {
-        font-size: 18px;
+        font-size: 1.1em;
         color: #505050;
         text-align: left;
-        padding-left:14px;
-        text-decoration:none;
+        padding-left: 14px;
+        text-decoration: none;
     }
 
 
@@ -77,7 +87,8 @@
     .dropdown-content a {
         float: none;
         color: #505050;
-        padding: 12px 16px;
+        padding: 0px 16px;
+        
         text-decoration: none;
         display: block;
         text-align: left;
@@ -99,8 +110,8 @@
 .column {
     float: left;
     width: 25%;
-    padding-top: 15px;
-    padding-bottom: 10px;
+    
+    padding-bottom: 15px;
     height: inherit;
     text-space-collapse: preserve-breaks;
     min-width: 170px;
@@ -123,7 +134,7 @@
     clear: both;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1080px) {
     .column {
         width: 100%;
         height: auto;
