@@ -69,6 +69,10 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
+    <Content Include="Images\20481904_1048723435231223_913612798821400576_n.jpg" />
+    <Content Include="Images\22709279_1587261681312005_2020875339328126976_n.jpg" />
+    <Content Include="Images\25023146_314743932378518_1334452875807424512_n.jpg" />
+    <Content Include="Images\IMG_20190401_221441_849.jpg" />
     <Content Include="JavaScript.js" />
     <Content Include="Styles.css" />
     <Content Include="Web.config">
