@@ -13,8 +13,8 @@
 </head>
 <body>
   
-             <div class="navbar">
-  <a class="not" href="#home">Sale</a>
+             <div id="navbar" class="navbar">
+  <a class="not" href="#">Sale</a>
   <div class="dropdown">
     <button class="dropbtn">Nutrition</button>
     <div class="dropdown-content">

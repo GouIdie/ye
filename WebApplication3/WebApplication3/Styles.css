@@ -1,19 +1,29 @@
 ﻿body {
     background-color: #F8F8F8;
     margin: 0;
-
 }
+
 
 .homepage {
-    color:aquamarine;
+    color: #262626;
     font-family: 'Century Gothic';
+    padding: 0 10px 10px 10px;
+    font-size: 1.1em;
 }
-
 
 *{
     box-sizing: border-box;
 }
+
+.homepage {
+    padding: 16px;
+}
+
+
 .navbar {
+    
+    
+    background-color: #F8F8F8;
     overflow: hidden;
     font-family: 'Century Gothic';
     letter-spacing: 0.2em;
@@ -29,8 +39,6 @@
         padding-left: 14px;
         text-decoration: none;
     }
-
-
 
     /* Links inside the navbar */
     .navbar a{
@@ -62,14 +70,13 @@
         letter-spacing: 0.2em;
         display: flex;
         justify-content: center;
+        padding-bottom: 20px;
     }
-
 
     .navbar .not:hover, .dropdown:hover .dropbtn {
         color: #732C2C;
         border-bottom: 3px solid #732C2C;
     }
-
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {
@@ -81,8 +88,6 @@
     /* margin-bottom: 100px;*/
     z-index: 1;
 }
-
-
 
     /* Links inside the dropdown */
     .dropdown-content a {
@@ -96,7 +101,6 @@
         letter-spacing: 0.1em;
 
     }
-
 
         .dropdown-content a:hover {
             color: #732C2C;
@@ -118,8 +122,6 @@
     text-space-collapse: preserve-breaks;
     min-width: 170px;
 }
-
-
 
     .column a, h2 {
         float: none;
@@ -147,7 +149,7 @@
     clear: both;
 }
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 600px) {
     .column {
         width: 100%;
         height: auto;
