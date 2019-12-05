@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Home.aspx" />
+    <Content Include="Image\download.jfif" />
     <Content Include="JavaScript.js" />
     <Content Include="Styles.css" />
     <Content Include="Web.config">

@@ -35,6 +35,8 @@
     <br />
     <p>home</p>
 
+    <img class="cam" src="Image/download.jfif" />
+    
 </div>
 
 </asp:Content>
