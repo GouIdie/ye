@@ -20,8 +20,10 @@ namespace WebApplication3
             Server.MapPath("RevisionSubs.accdb") + "; Persist Security Info=False");
             con.Open();
             String data1;
-            data1 = "insert into customerdetail values(" + TextBox1.Text + ",'" +
-             TextBox3.Text + "',')";
+            string product = TextBox1.Text;
+            int stock = Convert.ToInt32(TextBox3.Text);
+            data1 = "insert into Table1(Procduct,stock) values(" +"'"+ product + "','" +
+             stock+ "',')";
             com = new OleDbCommand(data1, con);
             com.ExecuteNonQuery();
             con.Close();
@@ -35,7 +37,7 @@ namespace WebApplication3
             con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
             Server.MapPath("RevisionSubs.accdb") + "; Persist Security Info=False");
             con.Open();
-            dad = new OleDbDataAdapter("select * from customerdetail", con);
+            dad = new OleDbDataAdapter("select * from Table1", con);
             ds = new DataSet();
             dad.Fill(ds);
             //GridView1.DataSource = ds;
