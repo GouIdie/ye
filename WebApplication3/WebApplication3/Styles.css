@@ -155,3 +155,8 @@
         height: auto;
     }
 }
+
+.cam img{
+    background-color:red;
+    margin:auto;
+}
