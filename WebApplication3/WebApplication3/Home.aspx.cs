@@ -21,9 +21,8 @@ namespace WebApplication3
             con.Open();
             String data1;
             string product = TextBox1.Text;
-            int stock = Convert.ToInt32(TextBox3.Text);
-            data1 = "insert into Table1(Procduct,stock) values(" +"'"+ product + "','" +
-             stock+ "',')";
+            string stock = TextBox3.Text;
+            data1 = "insert into Table1(Procduct,stock) values(" +"'"+ product + "','" + stock + "',')";
             com = new OleDbCommand(data1, con);
             com.ExecuteNonQuery();
             con.Close();
