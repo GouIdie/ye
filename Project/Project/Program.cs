@@ -16,7 +16,10 @@ namespace Project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Simulation());
+            using (var mainForm = new Simulation())
+            {
+                Application.Run(mainForm);
+            }
         }
     }
 }

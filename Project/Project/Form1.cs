@@ -7,15 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Windows.Input;
+using System.Runtime.InteropServices;
 namespace Project
 {
+
+
+
     public partial class Simulation : Form
     {
         public Simulation()
         {
             InitializeComponent();
+       
         }
+
+
 
         private void Simulation_Load(object sender, EventArgs e)
         {
@@ -28,6 +35,13 @@ namespace Project
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+
+
+
+        }
+        private void panel4_Paint(object sender, PaintEventArgs e)
         {
 
 
@@ -47,11 +61,10 @@ namespace Project
 
             base.WndProc(ref m);
         }
-        private void panel4_Paint(object sender, PaintEventArgs e)
+
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            this.WindowState = FormWindowState.Maximized;
         }
-
-
     }
 }
