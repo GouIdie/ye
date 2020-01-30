@@ -41,6 +41,11 @@ namespace Project
 
 
         }
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void panel4_Paint(object sender, PaintEventArgs e)
         {
 
@@ -62,9 +67,52 @@ namespace Project
             base.WndProc(ref m);
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e) //CustTB
+        {
+
+        }
+
+
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+      
+    
+     
+
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox3_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
