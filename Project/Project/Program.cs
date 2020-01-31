@@ -19,6 +19,7 @@ namespace Project
             using (var mainForm = new Simulation())
             {
                 Application.Run(mainForm);
+                
             }
         }
     }

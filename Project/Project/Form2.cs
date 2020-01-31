@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace Project
 {
-    public partial class Form2 : Form
+    public partial class Form2 : Simulation
     {
-        public Form2()
+        public Form2() : base("Form2")
         {
             InitializeComponent();
         }
+
+        public void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

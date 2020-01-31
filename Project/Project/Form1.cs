@@ -18,20 +18,33 @@ namespace Project
 
     public partial class Simulation : Form
     {
+        string FormID = string.Empty;
+        OleDbConnection connection;
+
         public Simulation()
         {
+            connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
             InitializeComponent();
-       
+
+
+        }
+
+        public Simulation(string id)
+        {
+            this.FormID = id;
+            InitializeComponent();
+
         }
 
 
 
-        private void Simulation_Load(object sender, EventArgs e)
+
+        public void Simulation_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        public void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
@@ -43,7 +56,7 @@ namespace Project
 
 
         }
-        private void panel3_Paint(object sender, PaintEventArgs e)
+        protected void Panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }
@@ -72,12 +85,14 @@ namespace Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Maximized;
+            Form3 f2 = new Form3();
+            f2.ShowDialog(); // Shows Form2
+            //WindowState = FormWindowState.Maximized;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e) //CustTB
         {
-            
+
         }
 
         private void TextBox2_TextChanged(object sender, EventArgs e) //UsernameTB
@@ -101,18 +116,23 @@ namespace Project
                 OleDbConnection conn = new OleDbConnection();
                 conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb";
 
-                string CustomerID = CustTB.Text;
-                string Username = UsernameTB.Text;
+                
+                string Username = UsernameTB.Text;//////////////////////////
+                int Ulength = Username.Length;
+                if (Ulength < 3 || Ulength > 32)
+                {
+                    MessageBox.Show(ex.Message);
+                }
                 string Password = PasswordTB.Text;
                 string Email = EmailTB.Text;
 
-                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (CustomerID,Username,[Password],Email) Values(@CustomerID,@Username, @Password, @Email)");
+                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
                 cmd.Connection = conn;
                 conn.Open();
 
                 if (conn.State == ConnectionState.Open)
                 {
-                    cmd.Parameters.Add("@CustomerID", OleDbType.VarChar).Value = CustomerID;
+                    
                     cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
                     cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = Password;
                     cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
@@ -125,7 +145,7 @@ namespace Project
                     catch (OleDbException ex)
                     {
                         MessageBox.Show(ex.Message);
-                        
+
                         conn.Close();
                     }
                 }
@@ -140,5 +160,26 @@ namespace Project
         {
 
         }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+        
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter("select Username from Customer", connection);
+            DataSet ds = new DataSet();
+            dataAdapter.Fill(ds, "Customer");
+            foreach (DataRow dataRow in ds.Tables[0].Rows)
+            {
+                listBox1.Items.Add(dataRow["Username"].ToString());
+            }
+
+        }
+
     }
 }
