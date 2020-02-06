@@ -14,8 +14,6 @@ using System.Data.OleDb;
 namespace Project
 {
 
-
-
     public partial class Simulation : Form
     {
         string FormID = string.Empty;
@@ -25,40 +23,27 @@ namespace Project
         {
             connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
             InitializeComponent();
-
-
         }
 
         public Simulation(string id)
         {
             this.FormID = id;
             InitializeComponent();
-
         }
-
-
-
 
         public void Simulation_Load(object sender, EventArgs e)
         {
-
         }
 
         public void panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
-
-
-
-
         }
         protected void Panel3_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)
@@ -118,40 +103,44 @@ namespace Project
 
                 
                 string Username = UsernameTB.Text;//////////////////////////
-                int Ulength = Username.Length;
+              int Ulength = Username.Length;
                 if (Ulength < 3 || Ulength > 32)
                 {
-                    MessageBox.Show(ex.Message);
-                }
-                string Password = PasswordTB.Text;
-                string Email = EmailTB.Text;
-
-                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
-                cmd.Connection = conn;
-                conn.Open();
-
-                if (conn.State == ConnectionState.Open)
-                {
-                    
-                    cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
-                    cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = Password;
-                    cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Data Added");
-                        conn.Close();
-                    }
-                    catch (OleDbException ex)
-                    {
-                        MessageBox.Show(ex.Message);
-
-                        conn.Close();
-                    }
+                    MessageBox.Show("Username is not long enough");
                 }
                 else
                 {
-                    MessageBox.Show("Connection Failed");
+
+                    string Password = PasswordTB.Text;
+                    string Email = EmailTB.Text;
+
+                    OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
+                    cmd.Connection = conn;
+                    conn.Open();
+
+                    if (conn.State == ConnectionState.Open)
+                    {
+
+                        cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
+                        cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = Password;
+                        cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Data Added");
+                            conn.Close();
+                        }
+                        catch (OleDbException ex)
+                        {
+                            MessageBox.Show(ex.Message);
+
+                            conn.Close();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Connection Failed");
+                    }
                 }
             }
         }
