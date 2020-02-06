@@ -90,6 +90,11 @@ namespace Project
         {
 
         }
+        private void textBox3_Entering(object sender, EventArgs e) //PasswordTB
+        {
+            PasswordTB.Clear();
+            PasswordTB.ForeColor = System.Drawing.Color.Black;
+        }
 
         private void textBox4_TextChanged(object sender, EventArgs e) //EmailTB
         {
@@ -112,20 +117,18 @@ namespace Project
                 else
                 {
                     string Password = PasswordTB.Text;
-                   
+
+                    Regex hasNumber = new Regex(@"[0-9]+");
+                    Regex hasUpperChar = new Regex(@"[A-Z]+");
+                    Regex hasMiniMaxChars = new Regex(@".{8,15}");
+                    Regex hasLowerChar = new Regex(@"[a-z]+");
+                    Regex hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
 
                     if (string.IsNullOrWhiteSpace(Password))
                     {
                         MessageBox.Show("Password should not be empty");
                     }
-
-                    var hasNumber = new Regex(@"[0-9]+");
-                    var hasUpperChar = new Regex(@"[A-Z]+");
-                    var hasMiniMaxChars = new Regex(@".{8,15}");
-                    var hasLowerChar = new Regex(@"[a-z]+");
-                    var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
-
-                    if (!hasLowerChar.IsMatch(Password))
+                    else if (!hasLowerChar.IsMatch(Password))
                     {
                         MessageBox.Show("Password should contain at least one lower case letter");
 
@@ -133,55 +136,63 @@ namespace Project
                     else if (!hasUpperChar.IsMatch(Password))
                     {
                         MessageBox.Show("Password should contain at least one upper case letter");
-                      
+
                     }
                     else if (!hasMiniMaxChars.IsMatch(Password))
                     {
                         MessageBox.Show("Password should not be less than or greater than 12 characters");
-                      
+
                     }
                     else if (!hasNumber.IsMatch(Password))
                     {
                         MessageBox.Show("Password should contain at least one numeric value");
-                
+
                     }
 
                     else if (!hasSymbols.IsMatch(Password))
                     {
                         MessageBox.Show("Password should contain at least one special case characters");
-                    
+
                     }
                     else
                     {
 
                         string Email = EmailTB.Text;
-
-                        OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
-                        cmd.Connection = conn;
-                        conn.Open();
-
-                        if (conn.State == ConnectionState.Open)
+                        Regex ValEmail = new Regex(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*" + "@" + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
+                        if (!ValEmail.IsMatch(Email))
                         {
-
-                            cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
-                            cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = Password;
-                            cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
-                            try
-                            {
-                                cmd.ExecuteNonQuery();
-                                MessageBox.Show("Data Added");
-                                conn.Close();
-                            }
-                            catch (OleDbException ex)
-                            {
-                                MessageBox.Show(ex.Message);
-
-                                conn.Close();
-                            }
+                            MessageBox.Show("Email is bad");
                         }
                         else
                         {
-                            MessageBox.Show("Connection Failed");
+
+                            OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
+                            cmd.Connection = conn;
+                            conn.Open();
+
+                            if (conn.State == ConnectionState.Open)
+                            {
+
+                                cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
+                                cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = Password;
+                                cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Data Added");
+                                    conn.Close();
+                                }
+                                catch (OleDbException ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+
+                                    conn.Close();
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Connection Failed");
+                            }
                         }
                     }
                 }
@@ -211,7 +222,10 @@ namespace Project
             }
 
         }
-            
 
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
