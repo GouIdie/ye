@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Runtime.InteropServices;
 using System.Data.OleDb;
+using System.Text.RegularExpressions;
 
 namespace Project
 {
@@ -101,50 +102,91 @@ namespace Project
                 OleDbConnection conn = new OleDbConnection();
                 conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb";
 
-                
+
                 string Username = UsernameTB.Text;//////////////////////////
-              int Ulength = Username.Length;
+                int Ulength = Username.Length;
                 if (Ulength < 3 || Ulength > 32)
                 {
                     MessageBox.Show("Username is not long enough");
                 }
                 else
                 {
-
                     string Password = PasswordTB.Text;
-                    string Email = EmailTB.Text;
+                   
 
-                    OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
-                    cmd.Connection = conn;
-                    conn.Open();
-
-                    if (conn.State == ConnectionState.Open)
+                    if (string.IsNullOrWhiteSpace(Password))
                     {
+                        MessageBox.Show("Password should not be empty");
+                    }
 
-                        cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
-                        cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = Password;
-                        cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
-                        try
-                        {
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Data Added");
-                            conn.Close();
-                        }
-                        catch (OleDbException ex)
-                        {
-                            MessageBox.Show(ex.Message);
+                    var hasNumber = new Regex(@"[0-9]+");
+                    var hasUpperChar = new Regex(@"[A-Z]+");
+                    var hasMiniMaxChars = new Regex(@".{8,15}");
+                    var hasLowerChar = new Regex(@"[a-z]+");
+                    var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
 
-                            conn.Close();
-                        }
+                    if (!hasLowerChar.IsMatch(Password))
+                    {
+                        MessageBox.Show("Password should contain at least one lower case letter");
+
+                    }
+                    else if (!hasUpperChar.IsMatch(Password))
+                    {
+                        MessageBox.Show("Password should contain at least one upper case letter");
+                      
+                    }
+                    else if (!hasMiniMaxChars.IsMatch(Password))
+                    {
+                        MessageBox.Show("Password should not be less than or greater than 12 characters");
+                      
+                    }
+                    else if (!hasNumber.IsMatch(Password))
+                    {
+                        MessageBox.Show("Password should contain at least one numeric value");
+                
+                    }
+
+                    else if (!hasSymbols.IsMatch(Password))
+                    {
+                        MessageBox.Show("Password should contain at least one special case characters");
+                    
                     }
                     else
                     {
-                        MessageBox.Show("Connection Failed");
+
+                        string Email = EmailTB.Text;
+
+                        OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
+                        cmd.Connection = conn;
+                        conn.Open();
+
+                        if (conn.State == ConnectionState.Open)
+                        {
+
+                            cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
+                            cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = Password;
+                            cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
+                            try
+                            {
+                                cmd.ExecuteNonQuery();
+                                MessageBox.Show("Data Added");
+                                conn.Close();
+                            }
+                            catch (OleDbException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+
+                                conn.Close();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Connection Failed");
+                        }
                     }
                 }
             }
         }
-
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -169,6 +211,7 @@ namespace Project
             }
 
         }
+            
 
     }
 }
