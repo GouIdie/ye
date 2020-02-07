@@ -32,6 +32,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.EmailTB = new System.Windows.Forms.TextBox();
             this.PasswordTB = new System.Windows.Forms.TextBox();
             this.UsernameTB = new System.Windows.Forms.TextBox();
@@ -39,8 +41,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.projectDataDataSet = new Project.ProjectDataDataSet();
             this.projectDataDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.button2 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.projectDataDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.projectDataDataSetBindingSource)).BeginInit();
@@ -79,6 +79,25 @@
             this.panel3.TabIndex = 2;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel3_Paint);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(33, 185);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(158, 95);
+            this.listBox1.TabIndex = 4;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(33, 288);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(158, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // EmailTB
             // 
             this.EmailTB.Location = new System.Drawing.Point(33, 120);
@@ -89,11 +108,14 @@
             // 
             // PasswordTB
             // 
+            this.PasswordTB.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.PasswordTB.Location = new System.Drawing.Point(33, 84);
             this.PasswordTB.Name = "PasswordTB";
             this.PasswordTB.Size = new System.Drawing.Size(158, 20);
             this.PasswordTB.TabIndex = 2;
+            this.PasswordTB.Text = "Password";
             this.PasswordTB.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.PasswordTB.Enter += new System.EventHandler(this.textBox3_Entering);
             // 
             // UsernameTB
             // 
@@ -104,6 +126,7 @@
             // 
             // SaveData
             // 
+            this.SaveData.ForeColor = System.Drawing.Color.Black;
             this.SaveData.Location = new System.Drawing.Point(33, 156);
             this.SaveData.Name = "SaveData";
             this.SaveData.Size = new System.Drawing.Size(158, 23);
@@ -131,24 +154,6 @@
             // 
             this.projectDataDataSetBindingSource.DataSource = this.projectDataDataSet;
             this.projectDataDataSetBindingSource.Position = 0;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(33, 288);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(158, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(33, 185);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(158, 95);
-            this.listBox1.TabIndex = 4;
             // 
             // Simulation
             // 
