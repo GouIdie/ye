@@ -121,7 +121,7 @@ namespace Project
                 int Ulength = Username.Length;
                 if (Ulength < 3 || Ulength > 32)
                 {
-                    MessageBox.Show(ex.Message);
+                    // MessageBox.Show(ex.Message);
                 }
                 string Password = PasswordTB.Text;
                 string Email = EmailTB.Text;
