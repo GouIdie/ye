@@ -1,6 +1,6 @@
 ﻿namespace Project
 {
-    partial class Simulation
+    partial class Signup
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -45,7 +45,6 @@
             this.projectDataDataSet = new Project.ProjectDataDataSet();
             this.projectDataDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.customerTableAdapter1 = new Project.ProjectDataDataSetTableAdapters.CustomerTableAdapter();
-            this.button1 = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.projectDataDataSet)).BeginInit();
@@ -68,7 +67,7 @@
             this.panel2.Controls.Add(this.listBox1);
             this.panel2.Location = new System.Drawing.Point(205, 28);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(730, 460);
+            this.panel2.Size = new System.Drawing.Size(753, 460);
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
@@ -95,8 +94,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.SeaShell;
-            this.panel3.Controls.Add(this.button1);
-            this.panel3.Controls.Add(this.panel7);
+            this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.panel6);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Controls.Add(this.panel4);
@@ -106,21 +104,24 @@
             this.panel3.Controls.Add(this.SaveData);
             this.panel3.Location = new System.Drawing.Point(-21, -9);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(521, 497);
+            this.panel3.Size = new System.Drawing.Size(457, 497);
             this.panel3.TabIndex = 2;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel3_Paint);
             // 
-            // panel7
+            // label1
             // 
-            this.panel7.Location = new System.Drawing.Point(407, 21);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(200, 100);
-            this.panel7.TabIndex = 7;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(110, 73);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(223, 25);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Create your account";
             // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
-            this.panel6.Location = new System.Drawing.Point(146, 149);
+            this.panel6.Location = new System.Drawing.Point(146, 155);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(160, 2);
             this.panel6.TabIndex = 6;
@@ -128,7 +129,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
-            this.panel5.Location = new System.Drawing.Point(146, 252);
+            this.panel5.Location = new System.Drawing.Point(146, 258);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(160, 2);
             this.panel5.TabIndex = 5;
@@ -136,7 +137,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
-            this.panel4.Location = new System.Drawing.Point(146, 200);
+            this.panel4.Location = new System.Drawing.Point(146, 206);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(160, 2);
             this.panel4.TabIndex = 4;
@@ -147,7 +148,7 @@
             this.EmailTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.EmailTB.Font = new System.Drawing.Font("Century Gothic", 12F);
             this.EmailTB.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.EmailTB.Location = new System.Drawing.Point(146, 226);
+            this.EmailTB.Location = new System.Drawing.Point(146, 232);
             this.EmailTB.Name = "EmailTB";
             this.EmailTB.Size = new System.Drawing.Size(158, 20);
             this.EmailTB.TabIndex = 3;
@@ -162,7 +163,7 @@
             this.PasswordTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PasswordTB.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordTB.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.PasswordTB.Location = new System.Drawing.Point(148, 174);
+            this.PasswordTB.Location = new System.Drawing.Point(148, 180);
             this.PasswordTB.Name = "PasswordTB";
             this.PasswordTB.Size = new System.Drawing.Size(158, 20);
             this.PasswordTB.TabIndex = 2;
@@ -176,7 +177,7 @@
             this.UsernameTB.BackColor = System.Drawing.Color.SeaShell;
             this.UsernameTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.UsernameTB.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UsernameTB.Location = new System.Drawing.Point(146, 123);
+            this.UsernameTB.Location = new System.Drawing.Point(146, 129);
             this.UsernameTB.Name = "UsernameTB";
             this.UsernameTB.Size = new System.Drawing.Size(158, 20);
             this.UsernameTB.TabIndex = 1;
@@ -191,7 +192,7 @@
             this.SaveData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.SaveData.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SaveData.ForeColor = System.Drawing.Color.SeaShell;
-            this.SaveData.Location = new System.Drawing.Point(146, 317);
+            this.SaveData.Location = new System.Drawing.Point(146, 323);
             this.SaveData.Name = "SaveData";
             this.SaveData.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.SaveData.Size = new System.Drawing.Size(158, 34);
@@ -214,21 +215,12 @@
             // 
             this.customerTableAdapter1.ClearBeforeFill = true;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(232, 37);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // Simulation
+            // Signup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(25)))));
-            this.ClientSize = new System.Drawing.Size(933, 485);
+            this.ClientSize = new System.Drawing.Size(440, 485);
             this.ControlBox = false;
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -239,7 +231,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Simulation";
+            this.Name = "Signup";
             this.ShowIcon = false;
             this.Text = "Simulation";
             this.Load += new System.EventHandler(this.Simulation_Load);
@@ -270,8 +262,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

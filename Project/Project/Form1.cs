@@ -15,20 +15,19 @@ using System.Text.RegularExpressions;
 namespace Project
 {
 
-    public partial class Simulation : Form
+    public partial class Signup : Form
     {
         string FormID = string.Empty;
       OleDbConnection conn;
 
-        public Simulation()
+        public Signup()
         {
             conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
             InitializeComponent();
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-
         }
 
-        public Simulation(string id)
+        public Signup(string id)
         {
             this.FormID = id;
             InitializeComponent();
@@ -57,13 +56,8 @@ namespace Project
 
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Form3 f2 = new Form3();
-            //f2.ShowDialog(); // Shows Form2
-           // WindowState = FormWindowState.Maximized;
-           // panel1.Dock = DockStyle.Fill;
-        }
+
+
         //----------------------------------------------------------------------------------------------
         public bool Uempty = true;
         private void UsernameTB_TextChanged(object sender, EventArgs e) //UsernameTB
@@ -169,84 +163,109 @@ namespace Project
                 }
                 else
                 {
-                    string Password = PasswordTB.Text;
-
-                    Regex hasNumber = new Regex(@"[0-9]+");
-                    Regex hasUpperChar = new Regex(@"[A-Z]+");
-                    Regex hasMiniMaxChars = new Regex(@".{8,15}");
-                    Regex hasLowerChar = new Regex(@"[a-z]+");
-                    Regex hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
-
-                    if (string.IsNullOrWhiteSpace(Password))
+                        OleDbDataAdapter dataAdapter = new OleDbDataAdapter("select Username from Customer", conn);
+                        DataSet ds = new DataSet();
+                        dataAdapter.Fill(ds, "Customer");
+                        bool Ufound=false;
+                    foreach (DataRow dataRow in ds.Tables[0].Rows)
                     {
-                        MessageBox.Show("Password should not be empty");
-                    }
-                    else if (!hasLowerChar.IsMatch(Password))
-                    {
-                        MessageBox.Show("Password should contain at least one lower case letter");
+                        if (dataRow["Username"].ToString() == Username)
+                        {                           
+                            Ufound = true;
+                            break;
 
-                    }
-                    else if (!hasUpperChar.IsMatch(Password))
-                    {
-                        MessageBox.Show("Password should contain at least one upper case letter");
-
-                    }
-                    else if (!hasMiniMaxChars.IsMatch(Password))
-                    {
-                        MessageBox.Show("Password should not be less than or greater than 12 characters");
-
-                    }
-                    else if (!hasNumber.IsMatch(Password))
-                    {
-                        MessageBox.Show("Password should contain at least one numeric value");
-
-                    }
-
-                    else if (!hasSymbols.IsMatch(Password))
-                    {
-                        MessageBox.Show("Password should contain at least one special case characters");
-
-                    }
-                    else
-                    {
-
-                        string Email = EmailTB.Text;
-                        Regex ValEmail = new Regex(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*" + "@" + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
-                        if (!ValEmail.IsMatch(Email))
+                        }
+                        else
                         {
-                            MessageBox.Show("Invalid email");
+                            continue;
+                        }
+                    }
+                    if (Ufound == true)
+                    {
+                        MessageBox.Show("Username taken");
+                    }
+                    else 
+                    { 
+                            
+                        string Password = PasswordTB.Text;
+
+                        Regex hasNumber = new Regex(@"[0-9]+");
+                        Regex hasUpperChar = new Regex(@"[A-Z]+");
+                        Regex hasMiniMaxChars = new Regex(@".{8,15}");
+                        Regex hasLowerChar = new Regex(@"[a-z]+");
+                        Regex hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+
+                        if (string.IsNullOrWhiteSpace(Password))
+                        {
+                            MessageBox.Show("Password should not be empty");
+                        }
+                        else if (!hasLowerChar.IsMatch(Password))
+                        {
+                            MessageBox.Show("Password should contain at least one lower case letter");
+
+                        }
+                        else if (!hasUpperChar.IsMatch(Password))
+                        {
+                            MessageBox.Show("Password should contain at least one upper case letter");
+
+                        }
+                        else if (!hasMiniMaxChars.IsMatch(Password))
+                        {
+                            MessageBox.Show("Password should not be less than or greater than 12 characters");
+
+                        }
+                        else if (!hasNumber.IsMatch(Password))
+                        {
+                            MessageBox.Show("Password should contain at least one numeric value");
+
+                        }
+
+                        else if (!hasSymbols.IsMatch(Password))
+                        {
+                            MessageBox.Show("Password should contain at least one special case characters");
+
                         }
                         else
                         {
 
-                            OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
-                            cmd.Connection = conn;
-                 
-                            conn.Open();
-                            
-
-
-                            if (conn.State == ConnectionState.Open)
+                            string Email = EmailTB.Text;
+                            Regex ValEmail = new Regex(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*" + "@" + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
+                            if (!ValEmail.IsMatch(Email))
                             {
-
-                                cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
-                                cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = Password;
-                                cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
-                                try
-                                {
-                                    cmd.ExecuteNonQuery();
-                                    MessageBox.Show("Data Added");
-                                    conn.Close();
-                                }
-                                catch (OleDbException ex)
-                                {
-                                    MessageBox.Show(ex.Message);
-                                    conn.Close();
-                                }
+                                MessageBox.Show("Invalid email");
                             }
                             else
                             {
-                                MessageBox.Show("Connection Failed");
+
+                                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
+                                cmd.Connection = conn;
+                 
+                                conn.Open();
+                            
+
+
+                                if (conn.State == ConnectionState.Open)
+                                {
+
+                                    cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
+                                    cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = Password;
+                                    cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
+                                    try
+                                    {
+                                        cmd.ExecuteNonQuery();
+                                        MessageBox.Show("Data Added");
+                                        conn.Close();
+                                    }
+                                    catch (OleDbException ex)
+                                    {
+                                        MessageBox.Show(ex.Message);
+                                        conn.Close();
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Connection Failed");
+                                }
                             }
                         }
                     }
@@ -257,10 +276,6 @@ namespace Project
         {
 
         }
-
-
-        
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -280,6 +295,10 @@ namespace Project
 
         }
 
-
+        public static bool LS= false;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Signup.LS=true;   
+        }
     }
 }

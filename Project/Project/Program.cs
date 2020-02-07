@@ -16,11 +16,12 @@ namespace Project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            using (var mainForm = new Form3())
+            using (var mainForm = new Main())
             {
                 Application.Run(mainForm);
                 
             }
         }
+
     }
 }
