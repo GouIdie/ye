@@ -17,34 +17,49 @@ namespace Project
             InitializeComponent();
         }
 
-        Form mdiChildForm = new Form();
+     
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case 0x84:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == 0x1)
+                        m.Result = (IntPtr)0x2;
+                    return;
+            }
+
+            base.WndProc(ref m);
+        }
 
         private void Form3_Load(object sender, System.EventArgs e)
         {
 
-            // Set the IsMdiContainer property to true.
-            IsMdiContainer = true;
-
-            // Set the child form's MdiParent property to 
-            // the current form.
-            mdiChildForm.MdiParent = this;
-
-            // Call the method that changes the background color.
-            SetBackGroundColorOfMDIForm();
         }
 
-        private void SetBackGroundColorOfMDIForm()
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            foreach (Control ctl in this.Controls)
-            {
-                if ((ctl) is MdiClient)
+            Simulation objForm = new Simulation();
+            objForm.TopLevel = false;
+            panel1.Controls.Add(objForm);
+            objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            objForm.Dock = DockStyle.Fill;
+            objForm.Show();
+        }
 
-                // If the control is the correct type,
-                // change the color.
-                {
-                    ctl.BackColor = System.Drawing.Color.PaleGreen;
-                }
-            }
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

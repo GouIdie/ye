@@ -18,12 +18,14 @@ namespace Project
     public partial class Simulation : Form
     {
         string FormID = string.Empty;
-        OleDbConnection connection;
+      OleDbConnection conn;
 
         public Simulation()
         {
-            connection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
+            conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
             InitializeComponent();
+            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+
         }
 
         public Simulation(string id)
@@ -38,10 +40,12 @@ namespace Project
 
         public void panel1_Paint(object sender, PaintEventArgs e)
         {
+  
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
+
         }
         protected void Panel3_Paint(object sender, PaintEventArgs e)
         {
@@ -49,66 +53,115 @@ namespace Project
 
         private void panel4_Paint(object sender, PaintEventArgs e)
         {
-
-
-
-
         }
-        protected override void WndProc(ref Message m)
-        {
-            switch (m.Msg)
-            {
-                case 0x84:
-                    base.WndProc(ref m);
-                    if ((int)m.Result == 0x1)
-                        m.Result = (IntPtr)0x2;
-                    return;
-            }
 
-            base.WndProc(ref m);
-        }
 
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form3 f2 = new Form3();
-            f2.ShowDialog(); // Shows Form2
-            //WindowState = FormWindowState.Maximized;
+            //Form3 f2 = new Form3();
+            //f2.ShowDialog(); // Shows Form2
+           // WindowState = FormWindowState.Maximized;
+           // panel1.Dock = DockStyle.Fill;
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e) //CustTB
+        //----------------------------------------------------------------------------------------------
+        public bool Uempty = true;
+        private void UsernameTB_TextChanged(object sender, EventArgs e) //UsernameTB
+        {   
+        }
+        private void UsernameTB_Enter(object sender, EventArgs e)
         {
-
+            if (string.IsNullOrWhiteSpace(UsernameTB.Text) || (Uempty == true))
+            {
+                UsernameTB.Clear();
+            }
+        
+            UsernameTB.ForeColor = SystemColors.WindowText;
         }
-
-        private void TextBox2_TextChanged(object sender, EventArgs e) //UsernameTB
+        private void UsernameTB_Leave(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(UsernameTB.Text))
+            {
+               
+                UsernameTB.Text = "Username";
+                UsernameTB.ForeColor = SystemColors.WindowFrame;
+                Uempty = true;
+            }
+            else
+            {
+                PasswordTB.ForeColor = SystemColors.WindowText;
+                Uempty = false;
 
+            }
         }
+        //----------------------------------------------------------------------------------------------
 
-        private void textBox3_TextChanged(object sender, EventArgs e) //PasswordTB
+        public bool Pempty = true;
+        private void PasswordTB_TextChanged(object sender, EventArgs e) //PasswordTB
+        {  
+        }
+        private void PasswordTB_Enter(object sender, EventArgs e) //PasswordTB
         {
-
+            if (string.IsNullOrWhiteSpace(PasswordTB.Text) || (Pempty == true))
+            {                
+                PasswordTB.Clear();                
+            }
+            PasswordTB.PasswordChar = '●';
+            PasswordTB.ForeColor = SystemColors.WindowText;
         }
-        private void textBox3_Entering(object sender, EventArgs e) //PasswordTB
+        private void PasswordTB_Leave(object sender, EventArgs e) //PasswordTB
         {
-            PasswordTB.Clear();
-            PasswordTB.ForeColor = System.Drawing.Color.Black;
+            if (string.IsNullOrWhiteSpace(PasswordTB.Text))
+            {
+                PasswordTB.PasswordChar = '\0';
+                PasswordTB.Text = "Password";
+                PasswordTB.ForeColor = SystemColors.WindowFrame;
+                Pempty = true;
+            }
+            else
+            {
+                PasswordTB.ForeColor = SystemColors.WindowText;
+                Pempty = false;
+                
+            }
         }
-
-        private void textBox4_TextChanged(object sender, EventArgs e) //EmailTB
+        //----------------------------------------------------------------------------------------------
+        public bool Eempty = true;
+        private void EmailTB_TextChanged(object sender, EventArgs e) //EmailTB
         {
         }
+        private void EmailTB_Enter(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(EmailTB.Text) || (Eempty == true))
+            {
+                EmailTB.Clear();
+            }
 
+            EmailTB.ForeColor = SystemColors.WindowText;
+        }
+
+        private void EmailTB_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(EmailTB.Text))
+            {
+                EmailTB.PasswordChar = '\0';
+                EmailTB.Text = "Email";
+                EmailTB.ForeColor = SystemColors.WindowFrame;
+                Eempty = true;
+            }
+            else
+            {
+                EmailTB.ForeColor = SystemColors.WindowText;
+                Eempty = false;
+
+            }
+        }
+        //----------------------------------------------------------------------------------------------
 
         private void SaveData_Click(object sender, EventArgs e)
         {
-            {
-                OleDbConnection conn = new OleDbConnection();
-                conn.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb";
-
-
-                string Username = UsernameTB.Text;//////////////////////////
+            {               
+                string Username = UsernameTB.Text;
                 int Ulength = Username.Length;
                 if (Ulength < 3 || Ulength > 32)
                 {
@@ -161,14 +214,17 @@ namespace Project
                         Regex ValEmail = new Regex(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*" + "@" + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
                         if (!ValEmail.IsMatch(Email))
                         {
-                            MessageBox.Show("Email is bad");
+                            MessageBox.Show("Invalid email");
                         }
                         else
                         {
 
                             OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
                             cmd.Connection = conn;
+                 
                             conn.Open();
+                            
+
 
                             if (conn.State == ConnectionState.Open)
                             {
@@ -185,7 +241,6 @@ namespace Project
                                 catch (OleDbException ex)
                                 {
                                     MessageBox.Show(ex.Message);
-
                                     conn.Close();
                                 }
                             }
@@ -203,29 +258,28 @@ namespace Project
 
         }
 
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
 
-        }
         
 
 
         private void button2_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            OleDbDataAdapter dataAdapter = new OleDbDataAdapter("select Username from Customer", connection);
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter("select Username from Customer", conn);
             DataSet ds = new DataSet();
             dataAdapter.Fill(ds, "Customer");
             foreach (DataRow dataRow in ds.Tables[0].Rows)
             {
                 listBox1.Items.Add(dataRow["Username"].ToString());
             }
-
+            conn.Close();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+
+
     }
 }
