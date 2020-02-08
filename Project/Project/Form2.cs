@@ -118,10 +118,12 @@ namespace Project
             }
             else
             {
-                OleDbDataAdapter PdataAdapter = new OleDbDataAdapter("SELECT CustomerID,Username,Password FROM Customer WHERE Username ="+Username+"AND Password = "+Password+";", conn);
-                ds = new DataSet();
-                UdataAdapter.Fill(ds, "Customer");
-                foreach (DataRow dataRow in ds.Tables[0].Rows)///////////////////////////
+                conn.Open();
+                OleDbDataReader reader = null;
+                OleDbCommand cmd = new OleDbCommand("SELECT CustomerID,Username,Password FROM Customer WHERE Username ="+Username+"AND Password = "+Password+";", conn);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                    foreach (DataRow dataRow in ds.Tables[0].Rows)///////////////////////////
                 {
                     MessageBox.Show(dataRow["Username"].ToString()+ dataRow["Password"].ToString());
                 }
