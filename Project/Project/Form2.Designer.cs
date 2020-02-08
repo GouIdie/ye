@@ -104,6 +104,7 @@
             this.SaveData.TabIndex = 10;
             this.SaveData.Text = "Log in";
             this.SaveData.UseVisualStyleBackColor = false;
+            this.SaveData.Click += new System.EventHandler(this.SaveData_Click);
             // 
             // Login
             // 

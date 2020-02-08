@@ -177,6 +177,7 @@
             this.UsernameTB.BackColor = System.Drawing.Color.SeaShell;
             this.UsernameTB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.UsernameTB.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsernameTB.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.UsernameTB.Location = new System.Drawing.Point(146, 129);
             this.UsernameTB.Name = "UsernameTB";
             this.UsernameTB.Size = new System.Drawing.Size(158, 20);

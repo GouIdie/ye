@@ -17,24 +17,26 @@ namespace Project
 
     public partial class Signup : Form
     {
-        string FormID = string.Empty;
-      OleDbConnection conn;
-
+        // string FormID = string.Empty;
+        OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
+        
         public Signup()
         {
-            conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
+            //conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
             InitializeComponent();
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
         }
 
-        public Signup(string id)
-        {
-            this.FormID = id;
-            InitializeComponent();
-        }
+
+       // public Signup(string id)
+        //{
+           // this.FormID = id;
+           // InitializeComponent();
+        //}
 
         public void Simulation_Load(object sender, EventArgs e)
         {
+
         }
 
         public void panel1_Paint(object sender, PaintEventArgs e)
@@ -46,12 +48,15 @@ namespace Project
         {
 
         }
+
         protected void Panel3_Paint(object sender, PaintEventArgs e)
         {
+
         }
 
         private void panel4_Paint(object sender, PaintEventArgs e)
         {
+
         }
 
 
@@ -163,9 +168,9 @@ namespace Project
                 }
                 else
                 {
-                        OleDbDataAdapter dataAdapter = new OleDbDataAdapter("select Username from Customer", conn);
+                        OleDbDataAdapter UdataAdapter = new OleDbDataAdapter("select Username from Customer", conn);
                         DataSet ds = new DataSet();
-                        dataAdapter.Fill(ds, "Customer");
+                        UdataAdapter.Fill(ds, "Customer");
                         bool Ufound=false;
                     foreach (DataRow dataRow in ds.Tables[0].Rows)
                     {
@@ -237,6 +242,30 @@ namespace Project
                             else
                             {
 
+                                OleDbDataAdapter EdataAdapter = new OleDbDataAdapter("select Email from Customer", conn);                               
+                                EdataAdapter.Fill(ds, "Customer");
+                                bool Efound = false;
+                                foreach (DataRow dataRow in ds.Tables[0].Rows)
+                                {
+                                    if (dataRow["Email"].ToString() == Email)
+                                    {
+                                        Efound = true;
+                                        break;
+
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
+                                }
+                                if (Efound == true)
+                                {
+                                    MessageBox.Show("Email in use");                                  
+                                }
+                                else 
+                                { 
+
+
                                 OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
                                 cmd.Connection = conn;
                  
@@ -266,12 +295,14 @@ namespace Project
                                 {
                                     MessageBox.Show("Connection Failed");
                                 }
+                                }
                             }
                         }
                     }
                 }
             }
         }
+        //----------------------------------------------------------------------------------------------
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -295,10 +326,10 @@ namespace Project
 
         }
 
-        public static bool LS= false;
+        
         private void button1_Click(object sender, EventArgs e)
         {
-            Signup.LS=true;   
+           
         }
     }
 }
