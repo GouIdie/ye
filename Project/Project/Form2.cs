@@ -21,6 +21,7 @@ namespace Project
         
         public void Form2_Load(object sender, EventArgs e)
         {
+            UsernameTB.ForeColor = SystemColors.WindowFrame;
         }
         //----------------------------------------------------------------------------------------------
         public bool Uempty = true;
@@ -119,14 +120,19 @@ namespace Project
             else
             {
                 conn.Open();
-                OleDbDataReader reader = null;
-                OleDbCommand cmd = new OleDbCommand("SELECT CustomerID,Username,Password FROM Customer WHERE Username ="+Username+"AND Password = "+Password+";", conn);
+                OleDbDataReader reader;
+                OleDbCommand cmd = new OleDbCommand("SELECT CustomerID,Username,Password FROM Customer WHERE Username = '"+Username+"' AND Password = '"+Password+"';", conn);
                 reader = cmd.ExecuteReader();
-                while (reader.Read())
-                    foreach (DataRow dataRow in ds.Tables[0].Rows)///////////////////////////
+                if (!reader.Read()) 
                 {
-                    MessageBox.Show(dataRow["Username"].ToString()+ dataRow["Password"].ToString());
+
+                    {
+                        MessageBox.Show("Password does not match");  
+                    }
                 }
+                else
+                    MessageBox.Show(reader[0].ToString());
+                conn.Close();
             }
         }
         //----------------------------------------------------------------------------------------------       

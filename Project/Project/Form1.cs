@@ -199,6 +199,7 @@ namespace Project
                         Regex hasMiniMaxChars = new Regex(@".{8,15}");
                         Regex hasLowerChar = new Regex(@"[a-z]+");
                         Regex hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+                        Regex hasSpeech = new Regex(@"[]");/////////////
 
                         if (string.IsNullOrWhiteSpace(Password))
                         {
