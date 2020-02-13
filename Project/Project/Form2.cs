@@ -120,15 +120,41 @@ namespace Project
             }
             else
             {
-                byte[] hashBytes = Convert.FromBase64String(Password);
+                conn.Open();
+                OleDbDataReader reader;
+                OleDbCommand cmd = new OleDbCommand("SELECT Password FROM CUSTOMER WHERE Username = '"+Username +"';",conn);
+                reader = cmd.ExecuteReader();
+                reader.Read();
+                string hashedP = (reader[0].ToString());
+                MessageBox.Show(reader[0].ToString());
+                byte[] hashBytes = Convert.FromBase64String(hashedP);
                 byte[] salt = new byte[16];
                 Array.Copy(hashBytes, 0, salt, 0, 16);
                 var pbkdf2 = new Rfc2898DeriveBytes(Password,salt,1000);
-                byte hash = pbkdf2.GetBytes(20); //https://medium.com/@mehanix/lets-talk-security-salted-password-hashing-in-c-5460be5c3aae
+                byte[] hash = pbkdf2.GetBytes(20); //https://medium.com/@mehanix/lets-talk-security-salted-password-hashing-in-c-5460be5c3aae
+                bool pass = true;
+                for (int i=0; i<20; i++)
+                {
+                    if (hashBytes[i + 16] != hash[i])
+                    {
+                        pass = false;
+                    }
+                }
+                if (pass == true)
+                {
+                    MessageBox.Show(Password);
+                }
+                else
+                {
 
+                }///////////////
+                
+                
+                
+                conn.Close();
                 conn.Open();
-                OleDbDataReader reader;
-                OleDbCommand cmd = new OleDbCommand("SELECT CustomerID,Username,Password FROM Customer WHERE Username = '"+Username+"' AND Password = '"+Password+"';", conn);
+                reader= null;
+                cmd = new OleDbCommand("SELECT CustomerID,Username,Password FROM Customer WHERE Username = '"+Username+"' AND Password = '"+Password+"';", conn);
                 reader = cmd.ExecuteReader();
                 if (!reader.Read()) 
                 {
