@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Runtime.InteropServices;
 using System.Data.OleDb;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
 
 namespace Project
 {
@@ -18,7 +19,7 @@ namespace Project
     public partial class Signup : Form
     {
         // string FormID = string.Empty;
-        OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
+        OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
         
         public Signup()
         {
@@ -189,9 +190,9 @@ namespace Project
                     {
                         MessageBox.Show("Username taken");
                     }
-                    else 
-                    { 
-                            
+                    else
+                    {
+
                         string Password = PasswordTB.Text;
 
                         Regex hasNumber = new Regex(@"[0-9]+");
@@ -199,11 +200,16 @@ namespace Project
                         Regex hasMiniMaxChars = new Regex(@".{8,15}");
                         Regex hasLowerChar = new Regex(@"[a-z]+");
                         Regex hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
-                        Regex hasSpeech = new Regex(@"[]");/////////////
+                        Regex hasSpeech = new Regex(@"[""']");
 
                         if (string.IsNullOrWhiteSpace(Password))
                         {
                             MessageBox.Show("Password should not be empty");
+                        }
+                        else if (hasSpeech.IsMatch(Password))
+                        {
+                            MessageBox.Show("Password can not contain certain characters");
+
                         }
                         else if (!hasLowerChar.IsMatch(Password))
                         {
@@ -233,6 +239,21 @@ namespace Project
                         }
                         else
                         {
+                            //----------------------------------------------------------------------------------------------
+
+                            byte[] salt;
+                            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+                            var pbkdf2 = new Rfc2898DeriveBytes(Password,salt,1000);
+                            byte[] hash = pbkdf2.GetBytes(20);
+                            byte[] hashBytes = new byte[36];
+                            Array.Copy(salt, 0, hashBytes, 0, 16);
+                            Array.Copy(hash, 0, hashBytes, 0, 16);
+                            string SavedPassword = Convert.ToBase64String(hashBytes);
+
+                            //----------------------------------------------------------------------------------------------
+
+
+
 
                             string Email = EmailTB.Text;
                             Regex ValEmail = new Regex(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*" + "@" + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
@@ -267,7 +288,7 @@ namespace Project
                                 { 
 
 
-                                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @Password, @Email)");
+                                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @SavedPassword, @Email)");
                                 cmd.Connection = conn;
                  
                                 conn.Open();
@@ -278,7 +299,7 @@ namespace Project
                                 {
 
                                     cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
-                                    cmd.Parameters.Add("@Password", OleDbType.VarChar).Value = Password;
+                                    cmd.Parameters.Add("@SavedPassword", OleDbType.VarChar).Value = SavedPassword;
                                     cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
                                     try
                                     {

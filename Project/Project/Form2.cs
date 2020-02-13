@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,7 +14,7 @@ namespace Project
 {
     public partial class Login : Form
     {
-        OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
+        OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
         public Login() 
         {
             InitializeComponent();
@@ -87,7 +88,7 @@ namespace Project
 
             }
         }
-
+        //----------------------------------------------------------------------------------------------
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -119,6 +120,12 @@ namespace Project
             }
             else
             {
+                byte[] hashBytes = Convert.FromBase64String(Password);
+                byte[] salt = new byte[16];
+                Array.Copy(hashBytes, 0, salt, 0, 16);
+                var pbkdf2 = new Rfc2898DeriveBytes(Password,salt,1000);
+                byte hash = pbkdf2.GetBytes(20); //https://medium.com/@mehanix/lets-talk-security-salted-password-hashing-in-c-5460be5c3aae
+
                 conn.Open();
                 OleDbDataReader reader;
                 OleDbCommand cmd = new OleDbCommand("SELECT CustomerID,Username,Password FROM Customer WHERE Username = '"+Username+"' AND Password = '"+Password+"';", conn);
