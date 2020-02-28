@@ -122,19 +122,17 @@ namespace Project
             {
                 conn.Open();
                 OleDbDataReader reader;
-                OleDbCommand cmd = new OleDbCommand("SELECT Password,SALT FROM CUSTOMER WHERE Username = '"+Username +"';",conn);
+                OleDbCommand cmd = new OleDbCommand("SELECT Password FROM CUSTOMER WHERE Username = '"+Username +"';",conn);
                 reader = cmd.ExecuteReader();
                 reader.Read();
                 string hashedP = reader[0].ToString();               
-                MessageBox.Show(hashedP);
-                MessageBox.Show(reader[1].ToString());
+            
                 byte[] hashBytes = Convert.FromBase64String(hashedP);
-
                 byte[] salt = new byte[16];
                 Array.Copy(hashBytes, 0, salt, 0, 16);
-                var pbkdf2 = new Rfc2898DeriveBytes(Password,salt,1000);
+                var pbkdf2 = new Rfc2898DeriveBytes(Password,salt,10000);
                 byte[] hash = pbkdf2.GetBytes(20); //https://medium.com/@mehanix/lets-talk-security-salted-password-hashing-in-c-5460be5c3aae
-                MessageBox.Show(Convert.ToBase64String(salt));
+               
 
                 bool pass = true;
                 for (int i=0; i<20; i++)
@@ -156,20 +154,7 @@ namespace Project
                 
                 
                 conn.Close();
-                conn.Open();
-                reader= null;
-                cmd = new OleDbCommand("SELECT CustomerID,Username,Password FROM Customer WHERE Username = '"+Username+"' AND Password = '"+Password+"';", conn);
-                reader = cmd.ExecuteReader();
-                if (!reader.Read()) 
-                {
 
-                    {
-                        MessageBox.Show("Password does not match");  
-                    }
-                }
-                else
-                    MessageBox.Show(reader[0].ToString());
-                conn.Close();
             }
         }
         //----------------------------------------------------------------------------------------------       
