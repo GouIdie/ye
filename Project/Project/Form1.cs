@@ -248,6 +248,7 @@ namespace Project
                             byte[] hashBytes = new byte[36];
                             Array.Copy(salt, 0, hashBytes, 0, 16);
                             Array.Copy(hash, 0, hashBytes, 0, 16);
+                            string Salty = Convert.ToBase64String(salt);
                             string SavedPassword = Convert.ToBase64String(hashBytes);
 
                             //----------------------------------------------------------------------------------------------
@@ -288,7 +289,7 @@ namespace Project
                                 { 
 
 
-                                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @SavedPassword, @Email)");
+                                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email,Salt) Values(@Username, @SavedPassword, @Email, @Salty)");
                                 cmd.Connection = conn;
                  
                                 conn.Open();
@@ -301,7 +302,8 @@ namespace Project
                                     cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
                                     cmd.Parameters.Add("@SavedPassword", OleDbType.VarChar).Value = SavedPassword;
                                     cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
-                                    try
+                                    cmd.Parameters.Add("@Salty", OleDbType.VarChar).Value = Salty;
+                                        try
                                     {
                                         cmd.ExecuteNonQuery();
                                         MessageBox.Show("Data Added");
