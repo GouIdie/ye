@@ -35,6 +35,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.customerTableAdapter1 = new Project.ProjectDataDataSetTableAdapters.CustomerTableAdapter();
+            this.panel3 = new System.Windows.Forms.Panel();
             panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -120,12 +121,21 @@
             // 
             this.customerTableAdapter1.ClearBeforeFill = true;
             // 
+            // panel3
+            // 
+            this.panel3.Location = new System.Drawing.Point(0, 1);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(802, 453);
+            this.panel3.TabIndex = 3;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint_1);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
             this.ClientSize = new System.Drawing.Size(800, 476);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(panel2);
@@ -150,5 +160,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Panel panel3;
     }
 }

@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Project
 {
     public partial class Login : Form
@@ -58,6 +59,8 @@ namespace Project
         }
         //----------------------------------------------------------------------------------------------
         public bool Pempty = true;
+
+
         private void PasswordTB_TextChanged(object sender, EventArgs e)
         {
         }
@@ -125,6 +128,7 @@ namespace Project
                 OleDbCommand cmd = new OleDbCommand("SELECT Password FROM CUSTOMER WHERE Username = '"+Username +"';",conn);
                 reader = cmd.ExecuteReader();
                 reader.Read();
+
                 string hashedP = reader[0].ToString();               
             
                 byte[] hashBytes = Convert.FromBase64String(hashedP);
@@ -144,11 +148,13 @@ namespace Project
                 }
                 if (pass == true)
                 {
-                    MessageBox.Show(Password);
+                    MessageBox.Show("Correct password");
+                    Program.Main;
+                  
                 }
                 else
                 {
-                    MessageBox.Show("|Incorrect username or password");
+                    MessageBox.Show("Incorrect username or password");
                 }///////////////
                 
                 

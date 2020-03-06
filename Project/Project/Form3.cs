@@ -39,6 +39,7 @@ namespace Project
         }
         Signup objForm = new Signup();
         Login objForm1 = new Login();
+        Form4 objForm2 = new Form4();
         private void Form3_Load(object sender, System.EventArgs e)
         {
             
@@ -48,6 +49,13 @@ namespace Project
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
+
+            objForm2.TopLevel = false;
+            panel3.Controls.Add(objForm2);
+            objForm2.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            objForm2.Dock = DockStyle.Fill;
+            objForm2.Show();
+            panel3.Hide();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -64,7 +72,11 @@ namespace Project
         {
 
         }
+        private void Panel3_Paint(object sender, PaintEventArgs e)
+        {
+           
 
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -81,6 +93,7 @@ namespace Project
            objForm1.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
            objForm1.Dock = DockStyle.Fill;
            objForm1.Show();
+           
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -94,6 +107,13 @@ namespace Project
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
         }
+
+        private void panel3_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
         //----------------------------------------------------------------------------------------------
     }
 }
