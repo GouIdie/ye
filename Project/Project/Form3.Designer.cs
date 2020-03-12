@@ -123,11 +123,12 @@
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(0, 1);
+            this.panel3.BackColor = System.Drawing.Color.Transparent;
+            this.panel3.Location = new System.Drawing.Point(0, -6);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(802, 453);
+            this.panel3.Size = new System.Drawing.Size(802, 484);
             this.panel3.TabIndex = 3;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint_1);
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // Main
             // 
@@ -160,6 +161,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Panel panel3;
+        public System.Windows.Forms.Panel panel3;
     }
 }

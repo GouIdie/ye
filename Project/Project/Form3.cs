@@ -12,9 +12,34 @@ namespace Project
 {
     public partial class Main : Form
     {
+        Login objForm1 = new Login();
+
+
+
+        Signup objForm = new Signup();
+   
+        Form4 objForm2 = new Form4();
+
         public Main()
         {
             InitializeComponent();
+            
+            objForm1.ButtonWasClicked += new Login.ClickButton(objForm1_ButtonWasClicked);
+        }
+
+
+        void objForm1_ButtonWasClicked()
+        {
+            objForm.Close();
+            objForm1.Close();
+            panel3.Show();
+
+            objForm2.TopLevel = false;
+            panel3.Controls.Add(objForm2);
+            objForm2.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            objForm2.Dock = DockStyle.Fill;
+            objForm2.Show();
+            
         }
         private const int WM_NCLBUTTONDBLCLK = 0x00A3;
         protected override void WndProc(ref Message m)
@@ -37,12 +62,10 @@ namespace Project
 
             base.WndProc(ref m);
         }
-        Signup objForm = new Signup();
-        Login objForm1 = new Login();
-        Form4 objForm2 = new Form4();
+ 
         private void Form3_Load(object sender, System.EventArgs e)
         {
-            
+            panel3.Hide();
             button3.Hide();
             objForm.TopLevel = false;
             panel1.Controls.Add(objForm);
@@ -50,12 +73,7 @@ namespace Project
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
 
-            objForm2.TopLevel = false;
-            panel3.Controls.Add(objForm2);
-            objForm2.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            objForm2.Dock = DockStyle.Fill;
-            objForm2.Show();
-            panel3.Hide();
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -72,11 +90,7 @@ namespace Project
         {
 
         }
-        private void Panel3_Paint(object sender, PaintEventArgs e)
-        {
-           
-
-        }
+    
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -108,7 +122,7 @@ namespace Project
             objForm.Show();
         }
 
-        private void panel3_Paint_1(object sender, PaintEventArgs e)
+        private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }
