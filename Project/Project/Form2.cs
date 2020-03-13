@@ -156,19 +156,12 @@ namespace Project
                 }
                 if (pass == true)
                 {
-                    MessageBox.Show("Correct password");
-                    
-                    {
-                        ButtonWasClicked();
-                    }
-                       
-   
-                  
+                    ButtonWasClicked();                                                       
                 }
                 else
                 {
                     MessageBox.Show("Incorrect username or password");
-                }///////////////
+                }
                
                 
                 

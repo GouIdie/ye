@@ -20,7 +20,8 @@ namespace Project
     {
         // string FormID = string.Empty;
         OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
-        
+
+ 
         public Signup()
         {
             //conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
@@ -289,7 +290,7 @@ namespace Project
                                 { 
 
 
-                                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email,Salt) Values(@Username, @SavedPassword, @Email, @Salty)");
+                                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @SavedPassword, @Email)");
                                 cmd.Connection = conn;
                  
                                 conn.Open();
@@ -302,7 +303,7 @@ namespace Project
                                     cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
                                     cmd.Parameters.Add("@SavedPassword", OleDbType.VarChar).Value = SavedPassword;
                                     cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
-                                    cmd.Parameters.Add("@Salty", OleDbType.VarChar).Value = Salty;
+                                   
                                         try
                                     {
                                         cmd.ExecuteNonQuery();

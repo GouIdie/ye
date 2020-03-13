@@ -53,9 +53,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.SeaShell;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Location = new System.Drawing.Point(406, -9);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(396, 487);
@@ -124,9 +124,9 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
-            this.panel3.Location = new System.Drawing.Point(0, -6);
+            this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(802, 484);
+            this.panel3.Size = new System.Drawing.Size(800, 476);
             this.panel3.TabIndex = 3;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
@@ -147,6 +147,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Main_MouseMove);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

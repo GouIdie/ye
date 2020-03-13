@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,8 +26,27 @@ namespace Project
             InitializeComponent();
             
             objForm1.ButtonWasClicked += new Login.ClickButton(objForm1_ButtonWasClicked);
+            objForm2.WinWasMoved += new Form4.MoveWin(objForm2_WinWasMoved);
+            objForm2.BtnPress += new Form4.Close(objForm2_BtnPress);
+        }
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        void objForm2_BtnPress()
+        {
+            this.Close();
         }
 
+        void objForm2_WinWasMoved()
+        {
+            ReleaseCapture();
+            SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+        }
 
         void objForm1_ButtonWasClicked()
         {
@@ -41,7 +61,7 @@ namespace Project
             objForm2.Show();
             
         }
-        private const int WM_NCLBUTTONDBLCLK = 0x00A3;
+       /* private const int WM_NCLBUTTONDBLCLK = 0x00A3;
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
@@ -61,7 +81,7 @@ namespace Project
 
 
             base.WndProc(ref m);
-        }
+        */
  
         private void Form3_Load(object sender, System.EventArgs e)
         {
@@ -72,7 +92,7 @@ namespace Project
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
-
+         
 
         }
 
@@ -127,7 +147,17 @@ namespace Project
 
         }
 
-
         //----------------------------------------------------------------------------------------------
+
+
+
+        private void Main_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+
+            }
+        }
     }
+
 }
