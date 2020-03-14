@@ -134,6 +134,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox PasswordTB;
         private System.Windows.Forms.TextBox UsernameTB;
-        private System.Windows.Forms.Button SaveData;
+        public System.Windows.Forms.Button SaveData;
     }
 }

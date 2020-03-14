@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,11 +13,55 @@ namespace Project
 {
     public partial class Main : Form
     {
+        Login objForm1 = new Login();
+
+
+
+        Signup objForm = new Signup();
+   
+        Form4 objForm2 = new Form4();
+
         public Main()
         {
             InitializeComponent();
+            
+            objForm1.ButtonWasClicked += new Login.ClickButton(objForm1_ButtonWasClicked);
+            objForm2.WinWasMoved += new Form4.MoveWin(objForm2_WinWasMoved);
+            objForm2.BtnPress += new Form4.Close(objForm2_BtnPress);
         }
-        private const int WM_NCLBUTTONDBLCLK = 0x00A3;
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        void objForm2_BtnPress()
+        {
+            this.Close();
+        }
+
+        void objForm2_WinWasMoved()
+        {
+            ReleaseCapture();
+            SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+        }
+
+        void objForm1_ButtonWasClicked()
+        {
+            objForm.Close();
+            objForm1.Close();
+            panel3.Show();
+
+            objForm2.TopLevel = false;
+            panel3.Controls.Add(objForm2);
+            objForm2.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            objForm2.Dock = DockStyle.Fill;
+            objForm2.Show();
+            
+        }
+       /* private const int WM_NCLBUTTONDBLCLK = 0x00A3;
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
@@ -36,35 +81,19 @@ namespace Project
 
 
             base.WndProc(ref m);
-        }
-
-        public static void Panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-
-        }
-
-        Signup objForm = new Signup();
-        Login objForm1 = new Login();
-        Form4 objForm2 = new Form4();
+        */
+ 
         private void Form3_Load(object sender, System.EventArgs e)
         {
-            
+            panel3.Hide();
             button3.Hide();
             objForm.TopLevel = false;
             panel1.Controls.Add(objForm);
             objForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm.Dock = DockStyle.Fill;
             objForm.Show();
+         
 
-            objForm2.TopLevel = false;
-            panel3.Controls.Add(objForm2);
-            objForm2.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            objForm2.Dock = DockStyle.Fill;
-            objForm2.Show();
-            panel3.Hide();
-
-            
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -113,12 +142,22 @@ namespace Project
             objForm.Show();
         }
 
-        private void panel3_Paint_1(object sender, PaintEventArgs e)
+        private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-
         //----------------------------------------------------------------------------------------------
+
+
+
+        private void Main_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+
+            }
+        }
     }
+
 }

@@ -15,17 +15,23 @@ namespace Project
 {
     public partial class Login : Form
     {
-        OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
+        OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
+
+        public delegate void ClickButton();
+        public event ClickButton ButtonWasClicked;
+
         public Login() 
         {
             InitializeComponent();
-            
+         
+  
         }
-        
-        public void Form2_Load(object sender, EventArgs e)
+
+
+
+            public void Form2_Load(object sender, EventArgs e)
         {
             UsernameTB.ForeColor = SystemColors.WindowFrame;
-            
         }
         //----------------------------------------------------------------------------------------------
         public bool Uempty = true;
@@ -150,20 +156,23 @@ namespace Project
                 }
                 if (pass == true)
                 {
-                    MessageBox.Show("Correct password");
-                    
-                  
+                    ButtonWasClicked();                                                       
                 }
                 else
                 {
                     MessageBox.Show("Incorrect username or password");
-                }///////////////
-                
+                }
+               
                 
                 
                 conn.Close();
 
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
         //----------------------------------------------------------------------------------------------       
     }
