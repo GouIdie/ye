@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+using System.Data.OleDb;
 namespace Project
 {
     public partial class Form4 : Form
@@ -20,14 +20,24 @@ namespace Project
         public delegate void Close();
         public event Close BtnPress;
 
-        public Form4()
+        private int CusD;
+        private OleDbConnection Conn;
+        public Form4(int Cid,OleDbConnection Con)
         {
             InitializeComponent();
+            CusD = Cid;
+            Conn = Con;           
         }
-
+       
         private void Form4_Load(object sender, EventArgs e)
         {
-
+            Conn.Open();
+            OleDbDataReader reader;
+            OleDbCommand cmd = new OleDbCommand("SELECT Username FROM CUSTOMER WHERE CustomerID = " + CusD + ";", Conn);
+            reader = cmd.ExecuteReader();
+            reader.Read();
+            label2.Text = reader[0].ToString();
+            Conn.Close();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -77,6 +87,16 @@ namespace Project
         private void button2_Click(object sender, EventArgs e)
         {
             BtnPress();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

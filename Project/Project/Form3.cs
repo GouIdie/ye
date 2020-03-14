@@ -12,22 +12,26 @@ using System.Windows.Forms;
 namespace Project
 {
     public partial class Main : Form
-    {
+    {       
+        Signup objForm = new Signup();
+
         Login objForm1 = new Login();
 
+        public static int ID;
 
+      //  Form4 objForm2 = new Form4();
+        
 
-        Signup objForm = new Signup();
-   
-        Form4 objForm2 = new Form4();
 
         public Main()
         {
             InitializeComponent();
             
             objForm1.ButtonWasClicked += new Login.ClickButton(objForm1_ButtonWasClicked);
-            objForm2.WinWasMoved += new Form4.MoveWin(objForm2_WinWasMoved);
-            objForm2.BtnPress += new Form4.Close(objForm2_BtnPress);
+           
+            
+            //objForm1.SendID += new Login.ID(objForm1_SendID);
+            
         }
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
@@ -48,19 +52,30 @@ namespace Project
             SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
 
+       // void objForm1_SendID()
+       
+
         void objForm1_ButtonWasClicked()
         {
+            ID = objForm1.getID;
+            Form4 objForm2 = new Form4(ID,objForm1.conn);
+            objForm2.BtnPress += new Form4.Close(objForm2_BtnPress);
+            objForm2.WinWasMoved += new Form4.MoveWin(objForm2_WinWasMoved);
+            
             objForm.Close();
             objForm1.Close();
             panel3.Show();
-
+            
             objForm2.TopLevel = false;
             panel3.Controls.Add(objForm2);
             objForm2.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             objForm2.Dock = DockStyle.Fill;
             objForm2.Show();
             
+            
         }
+
+  
        /* private const int WM_NCLBUTTONDBLCLK = 0x00A3;
         protected override void WndProc(ref Message m)
         {
@@ -82,7 +97,7 @@ namespace Project
 
             base.WndProc(ref m);
         */
- 
+
         private void Form3_Load(object sender, System.EventArgs e)
         {
             panel3.Hide();

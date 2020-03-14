@@ -15,16 +15,19 @@ namespace Project
 {
     public partial class Login : Form
     {
-        OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\thomas.gould\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
+        public OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
 
         public delegate void ClickButton();
         public event ClickButton ButtonWasClicked;
+        public int getID;
+        // public delegate void ID ();
+       // public event ID SendID;
 
         public Login() 
         {
             InitializeComponent();
-         
-  
+            
+           
         }
 
 
@@ -133,7 +136,7 @@ namespace Project
             {
                 conn.Open();
                 OleDbDataReader reader;
-                OleDbCommand cmd = new OleDbCommand("SELECT Password FROM CUSTOMER WHERE Username = '"+Username +"';",conn);
+                OleDbCommand cmd = new OleDbCommand("SELECT Password, CustomerID FROM CUSTOMER WHERE Username = '"+Username +"';",conn);
                 reader = cmd.ExecuteReader();
                 reader.Read();
 
@@ -156,6 +159,9 @@ namespace Project
                 }
                 if (pass == true)
                 {
+                    getID = Convert.ToInt32(reader[1].ToString());
+                    // SendID();
+                    conn.Close();
                     ButtonWasClicked();                                                       
                 }
                 else
