@@ -37,6 +37,13 @@ namespace Project
 
             base.WndProc(ref m);
         }
+
+        public static void Panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+
+        }
+
         Signup objForm = new Signup();
         Login objForm1 = new Login();
         Form4 objForm2 = new Form4();
@@ -56,6 +63,8 @@ namespace Project
             objForm2.Dock = DockStyle.Fill;
             objForm2.Show();
             panel3.Hide();
+
+            
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -72,11 +81,7 @@ namespace Project
         {
 
         }
-        private void Panel3_Paint(object sender, PaintEventArgs e)
-        {
-           
-
-        }
+    
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
