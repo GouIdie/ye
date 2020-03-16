@@ -99,7 +99,7 @@ namespace Project
     
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Close(); //CLoses the window on the button press
         }
         //----------------------------------------------------------------------------------------------
         
@@ -112,8 +112,7 @@ namespace Project
            panel1.Controls.Add(Login);
            Login.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
            Login.Dock = DockStyle.Fill;
-           Login.Show();
-           
+           Login.Show();         
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -134,8 +133,6 @@ namespace Project
         }
 
         //----------------------------------------------------------------------------------------------
-
-
 
         private void Main_MouseMove(object sender, MouseEventArgs e)
         {
