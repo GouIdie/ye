@@ -44,7 +44,7 @@ namespace Project
 
         }
 
-        public void panel1_Paint(object sender, PaintEventArgs e)
+        public void Panel1_Paint(object sender, PaintEventArgs e)
         {
   
         }

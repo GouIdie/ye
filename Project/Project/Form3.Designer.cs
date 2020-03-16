@@ -30,8 +30,8 @@
         {
             System.Windows.Forms.Panel panel2;
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.SwitchToSign = new System.Windows.Forms.Button();
+            this.SwitchToLog = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.customerTableAdapter1 = new Project.ProjectDataDataSetTableAdapters.CustomerTableAdapter();
@@ -54,8 +54,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.SeaShell;
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.SwitchToSign);
+            this.panel1.Controls.Add(this.SwitchToLog);
             this.panel1.Location = new System.Drawing.Point(406, -9);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(396, 487);
@@ -64,31 +64,31 @@
             // 
             // button3
             // 
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(166, 401);
-            this.button3.Name = "button3";
-            this.button3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button3.Size = new System.Drawing.Size(78, 30);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "Sign up";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.SwitchToSign.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
+            this.SwitchToSign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SwitchToSign.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SwitchToSign.Location = new System.Drawing.Point(166, 401);
+            this.SwitchToSign.Name = "button3";
+            this.SwitchToSign.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.SwitchToSign.Size = new System.Drawing.Size(78, 30);
+            this.SwitchToSign.TabIndex = 18;
+            this.SwitchToSign.Text = "Sign up";
+            this.SwitchToSign.UseVisualStyleBackColor = true;
+            this.SwitchToSign.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
-            this.button2.FlatAppearance.BorderSize = 2;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(166, 401);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(78, 30);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "Log in";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.SwitchToLog.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
+            this.SwitchToLog.FlatAppearance.BorderSize = 2;
+            this.SwitchToLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SwitchToLog.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SwitchToLog.Location = new System.Drawing.Point(166, 401);
+            this.SwitchToLog.Name = "button2";
+            this.SwitchToLog.Size = new System.Drawing.Size(78, 30);
+            this.SwitchToLog.TabIndex = 9;
+            this.SwitchToLog.Text = "Log in";
+            this.SwitchToLog.UseVisualStyleBackColor = true;
+            this.SwitchToLog.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -160,8 +160,8 @@
         private System.Windows.Forms.Label label1;
         private ProjectDataDataSetTableAdapters.CustomerTableAdapter customerTableAdapter1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button SwitchToLog;
+        private System.Windows.Forms.Button SwitchToSign;
         public System.Windows.Forms.Panel panel3;
     }
 }

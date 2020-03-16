@@ -1,6 +1,6 @@
 ﻿namespace Project
 {
-    partial class Form4
+    partial class Home
     {
         /// <summary>
         /// Required designer variable.

@@ -11,18 +11,18 @@ using System.Runtime.InteropServices;
 using System.Data.OleDb;
 namespace Project
 {
-    public partial class Form4 : Form
+    public partial class Home : Form
     {
         public delegate void MoveWin();
         public event MoveWin WinWasMoved;
 
 
-        public delegate void Close();
-        public event Close BtnPress;
+        public delegate void FormClose();
+        public event FormClose BtnPress;
 
         private int CusD;
         private OleDbConnection Conn;
-        public Form4(int Cid,OleDbConnection Con)
+        public Home(int Cid,OleDbConnection Con)
         {
             InitializeComponent();
             CusD = Cid;
