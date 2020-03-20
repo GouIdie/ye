@@ -20,8 +20,9 @@ namespace Project
         public delegate void ClickButton();
         public event ClickButton ButtonWasClicked;
         public int getID;
+
         // public delegate void ID ();
-       // public event ID SendID;
+        // public event ID SendID;
 
         public Login() 
         {
@@ -30,9 +31,7 @@ namespace Project
            
         }
 
-
-
-            public void Form2_Load(object sender, EventArgs e)
+        public void Form2_Load(object sender, EventArgs e)
         {
             UsernameTB.ForeColor = SystemColors.WindowFrame;
         }

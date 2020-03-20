@@ -16,7 +16,6 @@ namespace Project
         public delegate void MoveWin();
         public event MoveWin WinWasMoved;
 
-
         public delegate void FormClose();
         public event FormClose BtnPress;
 

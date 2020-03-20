@@ -18,26 +18,26 @@ namespace Project
 
     public partial class Signup : Form
     {
+
+        public delegate void ClickButton();
+        public event ClickButton ButtonWasClicked;
+        public int getID;
+
         // string FormID = string.Empty;
-        OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
+        //OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
 
-        public delegate void SignSuccess();
-        public event SignSuccess SignWasSuccess;
+        //public delegate void SignSuccess(); 
+        //public event SignSuccess SignWasSuccess;
 
+        private OleDbConnection Conn; 
 
-        public Signup()
+        public Signup(OleDbConnection Con)
         {
             //conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
             InitializeComponent();
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            Conn = Con;
         }
-
-
-       // public Signup(string id)
-        //{
-           // this.FormID = id;
-           // InitializeComponent();
-        //}
 
         public void Simulation_Load(object sender, EventArgs e)
         {
@@ -63,10 +63,6 @@ namespace Project
         {
 
         }
-
-
-
-
 
         //----------------------------------------------------------------------------------------------
         public bool Uempty = true;
@@ -98,6 +94,7 @@ namespace Project
 
             }
         }
+
         //----------------------------------------------------------------------------------------------
 
         public bool Pempty = true;
@@ -129,7 +126,9 @@ namespace Project
                 
             }
         }
+      
         //----------------------------------------------------------------------------------------------
+       
         public bool Eempty = true;
         private void EmailTB_TextChanged(object sender, EventArgs e) //EmailTB
         {
@@ -160,6 +159,7 @@ namespace Project
 
             }
         }
+        
         //----------------------------------------------------------------------------------------------
 
         private void SaveData_Click(object sender, EventArgs e)
@@ -173,7 +173,7 @@ namespace Project
                 }
                 else
                 {
-                        OleDbDataAdapter UdataAdapter = new OleDbDataAdapter("select Username from Customer", conn);
+                        OleDbDataAdapter UdataAdapter = new OleDbDataAdapter("select Username from Customer", Conn);
                         DataSet ds = new DataSet();
                         UdataAdapter.Fill(ds, "Customer");
                         bool Ufound=false;
@@ -269,7 +269,7 @@ namespace Project
                             else
                             {
 
-                                OleDbDataAdapter EdataAdapter = new OleDbDataAdapter("select Email from Customer", conn);                               
+                                OleDbDataAdapter EdataAdapter = new OleDbDataAdapter("select Email from Customer", Conn);                               
                                 EdataAdapter.Fill(ds, "Customer");
                                 bool Efound = false;
                                 foreach (DataRow dataRow in ds.Tables[0].Rows)
@@ -294,13 +294,13 @@ namespace Project
 
 
                                 OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @SavedPassword, @Email)");
-                                cmd.Connection = conn;
+                                cmd.Connection = Conn;
                  
-                                conn.Open();
+                                Conn.Open();
                             
 
 
-                                if (conn.State == ConnectionState.Open)
+                                if (Conn.State == ConnectionState.Open)
                                 {
 
                                     cmd.Parameters.Add("@Username", OleDbType.VarChar).Value = Username;
@@ -308,26 +308,30 @@ namespace Project
                                     cmd.Parameters.Add("@Email", OleDbType.VarChar).Value = Email;
                                     
                                         try
-                                    {
-                                        cmd.ExecuteNonQuery();
-                                            SignWasSuccess();
-                                            
-                                            //MessageBox.Show("Data Added");
-                                        
+                                        {
+                                            cmd.ExecuteNonQuery();                                            
+                                            MessageBox.Show("Data Added");
+                                            Conn.Close();
 
+                                            Conn.Open();
+                                            OleDbDataReader reader;
+                                            OleDbCommand Getid = new OleDbCommand("SELECT CustomerID FROM CUSTOMER WHERE Username = '" + Username + "';", Conn);
+                                            reader = Getid.ExecuteReader();
+                                            reader.Read();
+                                            getID = Convert.ToInt32(reader[0].ToString());
+                                            Conn.Close();
 
+                                            ButtonWasClicked();
 
-
-
-
-                                        conn.Close();
-                                    }
+                                        }
                                     catch (OleDbException ex)
                                     {
                                         MessageBox.Show(ex.Message);
-                                        conn.Close();
+                                        Conn.Close();
                                     }
-                                }
+
+
+                                    }
                                 else
                                 {
                                     MessageBox.Show("Connection Failed");
@@ -348,14 +352,14 @@ namespace Project
         private void button2_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            OleDbDataAdapter dataAdapter = new OleDbDataAdapter("select Username from Customer", conn);
+            OleDbDataAdapter dataAdapter = new OleDbDataAdapter("select Username from Customer", Conn);
             DataSet ds = new DataSet();
             dataAdapter.Fill(ds, "Customer");
             foreach (DataRow dataRow in ds.Tables[0].Rows)
             {
                 listBox1.Items.Add(dataRow["Username"].ToString());
             }
-            conn.Close();
+            Conn.Close();
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
