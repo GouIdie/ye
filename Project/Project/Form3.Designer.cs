@@ -30,9 +30,9 @@
         {
             System.Windows.Forms.Panel panel2;
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.SwitchToSign = new System.Windows.Forms.Button();
             this.SwitchToLog = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.customerTableAdapter1 = new Project.ProjectDataDataSetTableAdapters.CustomerTableAdapter();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -62,34 +62,6 @@
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // button3
-            // 
-            this.SwitchToSign.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
-            this.SwitchToSign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SwitchToSign.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SwitchToSign.Location = new System.Drawing.Point(166, 401);
-            this.SwitchToSign.Name = "button3";
-            this.SwitchToSign.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.SwitchToSign.Size = new System.Drawing.Size(78, 30);
-            this.SwitchToSign.TabIndex = 18;
-            this.SwitchToSign.Text = "Sign up";
-            this.SwitchToSign.UseVisualStyleBackColor = true;
-            this.SwitchToSign.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.SwitchToLog.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
-            this.SwitchToLog.FlatAppearance.BorderSize = 2;
-            this.SwitchToLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SwitchToLog.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SwitchToLog.Location = new System.Drawing.Point(166, 401);
-            this.SwitchToLog.Name = "button2";
-            this.SwitchToLog.Size = new System.Drawing.Size(78, 30);
-            this.SwitchToLog.TabIndex = 9;
-            this.SwitchToLog.Text = "Log in";
-            this.SwitchToLog.UseVisualStyleBackColor = true;
-            this.SwitchToLog.Click += new System.EventHandler(this.button2_Click);
-            // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.SeaShell;
@@ -104,6 +76,34 @@
             this.button1.Text = " X";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // SwitchToSign
+            // 
+            this.SwitchToSign.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
+            this.SwitchToSign.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SwitchToSign.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SwitchToSign.Location = new System.Drawing.Point(166, 401);
+            this.SwitchToSign.Name = "SwitchToSign";
+            this.SwitchToSign.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.SwitchToSign.Size = new System.Drawing.Size(78, 30);
+            this.SwitchToSign.TabIndex = 18;
+            this.SwitchToSign.Text = "Sign up";
+            this.SwitchToSign.UseVisualStyleBackColor = true;
+            this.SwitchToSign.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // SwitchToLog
+            // 
+            this.SwitchToLog.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
+            this.SwitchToLog.FlatAppearance.BorderSize = 2;
+            this.SwitchToLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SwitchToLog.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SwitchToLog.Location = new System.Drawing.Point(166, 401);
+            this.SwitchToLog.Name = "SwitchToLog";
+            this.SwitchToLog.Size = new System.Drawing.Size(78, 30);
+            this.SwitchToLog.TabIndex = 9;
+            this.SwitchToLog.Text = "Log in";
+            this.SwitchToLog.UseVisualStyleBackColor = true;
+            this.SwitchToLog.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 

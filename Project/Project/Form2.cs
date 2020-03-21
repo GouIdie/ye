@@ -49,6 +49,7 @@ namespace Project
             }
 
             UsernameTB.ForeColor = SystemColors.WindowText;
+
         }
 
         private void UsernameTB_Leave(object sender, EventArgs e)

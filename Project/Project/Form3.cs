@@ -69,9 +69,7 @@ namespace Project
 
 
         private void Form3_Load(object sender, System.EventArgs e)
-        {
-            
-            
+        {                    
             panel3.Hide(); //panel3 is hidden on startup as the user has to login or signup to show it
             SwitchToSign.Hide(); //Hides the Button to swtich from login to signup
             
