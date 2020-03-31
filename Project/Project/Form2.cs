@@ -9,14 +9,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Configuration;
 
 namespace Project
 {
     public partial class Login : Form
     {
         public OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
-
         public delegate void ClickButton();
         public event ClickButton ButtonWasClicked;
         public int getID;

@@ -29,7 +29,7 @@ namespace Project
             InitializeComponent();
             CusD = Cid;
             Conn = Con;
-            MySub = new MySub();
+            MySub = new MySub(CusD,Conn);
         }
        
         private void Form4_Load(object sender, EventArgs e)
@@ -112,5 +112,6 @@ namespace Project
         {
             MySub.Hide();
         }
+
     }
 }
