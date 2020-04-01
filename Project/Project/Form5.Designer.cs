@@ -108,9 +108,9 @@
             this.label3.ForeColor = System.Drawing.Color.SeaShell;
             this.label3.Location = new System.Drawing.Point(259, 241);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 21);
+            this.label3.Size = new System.Drawing.Size(55, 21);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Description";
+            this.label3.Text = "Notes";
             // 
             // label4
             // 
@@ -142,6 +142,7 @@
             this.richTextBox3.Size = new System.Drawing.Size(355, 156);
             this.richTextBox3.TabIndex = 9;
             this.richTextBox3.Text = "";
+            this.richTextBox3.TextChanged += new System.EventHandler(this.richTextBox3_TextChanged);
             // 
             // button2
             // 
