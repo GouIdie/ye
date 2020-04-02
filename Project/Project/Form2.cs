@@ -20,9 +20,6 @@ namespace Project
         public event ClickButton ButtonWasClicked;
         public int getID;
 
-        // public delegate void ID ();
-        // public event ID SendID;
-
         public Login() 
         {
             InitializeComponent();
@@ -159,19 +156,14 @@ namespace Project
                 if (pass == true)
                 {
                     getID = Convert.ToInt32(reader[1].ToString());
-                    // SendID();
                     conn.Close();
                     ButtonWasClicked();                                                       
                 }
                 else
                 {
                     MessageBox.Show("Incorrect username or password");
-                }
-               
-                
-                
+                }            
                 conn.Close();
-
             }
         }
 

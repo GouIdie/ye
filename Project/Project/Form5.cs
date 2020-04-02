@@ -40,7 +40,7 @@ namespace Project
         private void Form5_Load(object sender, EventArgs e)
         {
             LoadData();
-            Conn.Open();
+     
             
         }
         private void LoadData()
@@ -78,6 +78,9 @@ namespace Project
         {
 
             listBox1.Refresh();
+            richTextBox1.Refresh();
+            richTextBox2.Refresh();
+            richTextBox3.Refresh();
             //-----------------------------------------------------------------
             reader = null;
             string query = "SELECT Subscriptions.SubscriptionName,CustSub.Notes,CustSub.DateAdded,Subscriptions.SubscriptionID,CustSub.Nickname FROM Subscriptions,CustSub WHERE CustSub.CustomerID=" + CusD + "And CustSub.SubscriptionID = Subscriptions.SubscriptionID And CustSub.Nickname='"+listBox1.Text+"'";
@@ -100,7 +103,7 @@ namespace Project
                 Dataloaded = true;
             }
             catch
-            {               
+            {
             }
             Conn.Close();           
         }
@@ -165,16 +168,16 @@ namespace Project
                     richTextBox3.Text = Notes;
                 }
 
-                reader = null;
-                string query = "UPDATE Subscriptions SET SubscriptionName='"+richTextBox2.Text+"' WHERE SubscriptionID ="+SubID+";";
-                cmd.CommandText = query;
-                Conn.Open();
-                reader = cmd.ExecuteReader();
-                Conn.Close();
+             //   reader = null;
+              //  string query = "UPDATE Subscriptions SET SubscriptionName='"+richTextBox2.Text+"' WHERE SubscriptionID ="+SubID+";";
+              //  cmd.CommandText = query;
+              //  Conn.Open();
+              //  reader = cmd.ExecuteReader();
+               // Conn.Close();
 
                 Conn.Open();
                 reader = null;
-                query = "UPDATE CustSub SET Notes = '" + richTextBox3.Text + "' WHERE SubscriptionID =" + SubID + " AND CustomerID=" + CusD + ";";
+                string query = "UPDATE CustSub SET NickName= '"+richTextBox2.Text+"',DateAdded='"+richTextBox1.Text+"',Notes = '" + richTextBox3.Text + "' WHERE SubscriptionID =" + SubID + " AND CustomerID=" + CusD + ";";
                 cmd.CommandText = query;
                 reader = cmd.ExecuteReader();
                 Conn.Close();
@@ -183,7 +186,7 @@ namespace Project
                 richTextBox2.Enabled = false;
                 richTextBox3.Enabled = false;
                 richTextBox4.Enabled = false;
-
+                LoadData();
             }
             else
             {
