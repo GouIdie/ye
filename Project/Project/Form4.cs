@@ -23,6 +23,7 @@ namespace Project
         private OleDbConnection Conn;
 
         public MySub MySub;
+        public Addsub Addsub;
 
         public Home(int Cid,OleDbConnection Con)
         {
@@ -30,6 +31,8 @@ namespace Project
             CusD = Cid;
             Conn = Con;
             MySub = new MySub(CusD,Conn);
+            Addsub = new Addsub(CusD,Conn);
+
         }
        
         private void Form4_Load(object sender, EventArgs e)
@@ -42,11 +45,23 @@ namespace Project
             label2.Text = ("- "+reader[0].ToString());
             Conn.Close();
 
+
+
             MySub.TopLevel = false; //Allows the Home Form to be docked
             panel2.Controls.Add(MySub); //Adds the form to the Panel
             MySub.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None; //removes any border
             MySub.Dock = DockStyle.Fill; //Docks the Form to the panel so it is aligned and fills the panel
-            MySub.Show(); //Shows the Signup Form to the user   
+          
+
+
+            Addsub.TopLevel = false;
+            panel2.Controls.Add(Addsub);
+            Addsub.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            Addsub.Dock = DockStyle.Fill;
+            
+            Addsub.Show();
+
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -106,11 +121,13 @@ namespace Project
         private void MySubscriptions_Click(object sender, EventArgs e)
         {
             MySub.Show();
+            Addsub.Hide();
         }
 
         private void AddSubscription_Click(object sender, EventArgs e)
         {
             MySub.Hide();
+            Addsub.Show();
         }
 
     }

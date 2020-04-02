@@ -49,7 +49,7 @@ namespace Project
            
             try
             {
-                string query = "SELECT SubscriptionName FROM Subscriptions,CustSub WHERE CustSub.CustomerID=" + CusD + "And CustSub.SubscriptionID = Subscriptions.SubscriptionID";
+                string query = "SELECT Nickname FROM Subscriptions,CustSub WHERE CustSub.CustomerID=" + CusD + "And CustSub.SubscriptionID = Subscriptions.SubscriptionID";
                 cmd.CommandText = query;
                 Conn.Open();
                 reader = cmd.ExecuteReader();
@@ -80,16 +80,19 @@ namespace Project
             listBox1.Refresh();
             //-----------------------------------------------------------------
             reader = null;
-            string query = "SELECT Subscriptions.SubscriptionName,CustSub.Notes,CustSub.DateAdded,Subscriptions.SubscriptionID FROM Subscriptions,CustSub WHERE CustSub.CustomerID=" + CusD + "And CustSub.SubscriptionID = Subscriptions.SubscriptionID And Subscriptions.SubscriptionName='"+listBox1.Text+"'";
+            string query = "SELECT Subscriptions.SubscriptionName,CustSub.Notes,CustSub.DateAdded,Subscriptions.SubscriptionID,CustSub.Nickname FROM Subscriptions,CustSub WHERE CustSub.CustomerID=" + CusD + "And CustSub.SubscriptionID = Subscriptions.SubscriptionID And CustSub.Nickname='"+listBox1.Text+"'";
             cmd.CommandText = query;
             Conn.Open();
             reader = cmd.ExecuteReader();
             reader.Read();
             try {
-                richTextBox2.Text = reader[0].ToString();
+                label6.Text = reader[0].ToString();
+                
                 richTextBox3.Text = reader[1].ToString();
                 richTextBox1.Text = (reader[2].ToString()).Substring(0, 8);
                 SubID = Convert.ToInt32(reader[3].ToString());
+                richTextBox2.Text = reader[4].ToString();
+
                 SubName = reader[0].ToString();
                 Notes = reader[1].ToString();
                 DateAdded = reader[2].ToString();
@@ -189,6 +192,16 @@ namespace Project
         }
 
         private void richTextBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
         {
 
         }
