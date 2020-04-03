@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -36,9 +39,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +61,51 @@
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.SeaShell;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.SeaShell;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(28)))));
+            this.button6.Location = new System.Drawing.Point(-1, 219);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(180, 33);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "- Search All";
+            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button6.UseVisualStyleBackColor = false;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.SeaShell;
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.SeaShell;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(28)))));
+            this.button5.Location = new System.Drawing.Point(-1, 183);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(180, 33);
+            this.button5.TabIndex = 3;
+            this.button5.Text = "- Add Password";
+            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.UseVisualStyleBackColor = false;
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.SeaShell;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.SeaShell;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(28)))));
+            this.button4.Location = new System.Drawing.Point(0, 105);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(180, 33);
+            this.button4.TabIndex = 2;
+            this.button4.Text = "- My Passwords";
+            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.UseVisualStyleBackColor = false;
             // 
             // button3
             // 
@@ -154,51 +199,6 @@
             this.panel2.Size = new System.Drawing.Size(622, 442);
             this.panel2.TabIndex = 2;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.SeaShell;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.SeaShell;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(28)))));
-            this.button4.Location = new System.Drawing.Point(0, 105);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(180, 33);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "- My Passwords";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.SeaShell;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.SeaShell;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(28)))));
-            this.button5.Location = new System.Drawing.Point(-1, 183);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(180, 33);
-            this.button5.TabIndex = 3;
-            this.button5.Text = "- Add Password";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.SeaShell;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.SeaShell;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(28)))));
-            this.button6.Location = new System.Drawing.Point(-1, 219);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(180, 33);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "- Search All";
-            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.UseVisualStyleBackColor = false;
             // 
             // Home
             // 

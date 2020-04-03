@@ -50,9 +50,7 @@ namespace Project
             MySub.TopLevel = false; //Allows the Home Form to be docked
             panel2.Controls.Add(MySub); //Adds the form to the Panel
             MySub.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None; //removes any border
-            MySub.Dock = DockStyle.Fill; //Docks the Form to the panel so it is aligned and fills the panel
-          
-
+            MySub.Dock = DockStyle.Fill; //Docks the Form to the panel so it is aligned and fills the panel       
 
             Addsub.TopLevel = false;
             panel2.Controls.Add(Addsub);

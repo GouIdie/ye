@@ -15,49 +15,48 @@ namespace Project
 {
     public partial class Login : Form
     {
-        public OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
-        public delegate void ClickButton();
-        public event ClickButton ButtonWasClicked;
-        public int getID;
+        public OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb"); // Connection string to connect to database
+        public delegate void ClickButton(); 
+        public event ClickButton ButtonWasClicked; // Points towards the ButtonWasClicked event in the Main Form
+        public int getID; // Variable to get the users ID once they have signed in
 
         public Login() 
         {
-            InitializeComponent();
-            
-           
+            InitializeComponent();        
         }
-
+     
         public void Form2_Load(object sender, EventArgs e)
         {
             UsernameTB.ForeColor = SystemColors.WindowFrame;
         }
         //----------------------------------------------------------------------------------------------
-        public bool Uempty = true;
+        public bool Uempty = true; // On startup, The username text box is empty
+        
         private void UsernameTB_TextChanged(object sender, EventArgs e)
         {
         }
 
         private void UsernameTB_Enter(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(UsernameTB.Text) || (Uempty == true))
+            if (string.IsNullOrWhiteSpace(UsernameTB.Text) || (Uempty == true)) // If there is no text in the textbox or the inital message is there, the text box is cleared
             {
                 UsernameTB.Clear();
             }
 
-            UsernameTB.ForeColor = SystemColors.WindowText;
+            UsernameTB.ForeColor = SystemColors.WindowText; // Sets the text colour to windowText
 
         }
 
         private void UsernameTB_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(UsernameTB.Text))
+            if (string.IsNullOrWhiteSpace(UsernameTB.Text)) // If the textbox is empty when leaving the textbox, It is filled with the original instruction
             {
 
                 UsernameTB.Text = "Username";
                 UsernameTB.ForeColor = SystemColors.WindowFrame;
                 Uempty = true;
             }
-            else
+            else 
             {
                 PasswordTB.ForeColor = SystemColors.WindowText;
                 Uempty = false;
@@ -65,7 +64,7 @@ namespace Project
             }
         }
         //----------------------------------------------------------------------------------------------
-        public bool Pempty = true;
+        public bool Pempty = true; // On startup, The password text box is empty
 
 
         private void PasswordTB_TextChanged(object sender, EventArgs e)
@@ -74,19 +73,19 @@ namespace Project
 
         private void PasswordTB_Enter(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(PasswordTB.Text) || (Pempty == true))
+            if (string.IsNullOrWhiteSpace(PasswordTB.Text) || (Pempty == true)) // If there is no text in the textbox or the inital message is there, the text box is cleared
             {
                 PasswordTB.Clear();
             }
-            PasswordTB.PasswordChar = '●';
+            PasswordTB.PasswordChar = '●'; // The password characters are set to hide the data as the user inputs it
             PasswordTB.ForeColor = SystemColors.WindowText;
         }
 
         private void PasswordTB_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(PasswordTB.Text))
+            if (string.IsNullOrWhiteSpace(PasswordTB.Text)) // If the textbox is empty when leaving the textbox, It is filled with the original instruction
             {
-                PasswordTB.PasswordChar = '\0';
+                PasswordTB.PasswordChar = '\0'; 
                 PasswordTB.Text = "Password";
                 PasswordTB.ForeColor = SystemColors.WindowFrame;
                 Pempty = true;
@@ -95,26 +94,24 @@ namespace Project
             {
                 PasswordTB.ForeColor = SystemColors.WindowText;
                 Pempty = false;
-
             }
         }
         //----------------------------------------------------------------------------------------------
         private void button1_Click(object sender, EventArgs e)
         {
-
         }
         
         private void SaveData_Click(object sender, EventArgs e)
         {
             string Username = UsernameTB.Text;
             string Password = PasswordTB.Text;
-            OleDbDataAdapter UdataAdapter = new OleDbDataAdapter("select Username from Customer", conn);
+            OleDbDataAdapter UdataAdapter = new OleDbDataAdapter("select Username from Customer", conn); // All current usernames are selected from the Customer table
             DataSet ds = new DataSet();
             UdataAdapter.Fill(ds, "Customer");
             bool Ufound = false;
             foreach (DataRow dataRow in ds.Tables[0].Rows)
             {
-                if (dataRow["Username"].ToString() == Username)
+                if (dataRow["Username"].ToString() == Username) // Checks if the username exists
                 {
                     Ufound = true;
                     break;
@@ -124,7 +121,7 @@ namespace Project
                     continue;
                 }
             }
-            if (Ufound == false)
+            if (Ufound == false) // If the username is not in the table then the user is notified
             {
                 MessageBox.Show("Username not found");
             }
@@ -132,21 +129,22 @@ namespace Project
             {
                 conn.Open();
                 OleDbDataReader reader;
-                OleDbCommand cmd = new OleDbCommand("SELECT Password, CustomerID FROM CUSTOMER WHERE Username = '"+Username +"';",conn);
+                OleDbCommand cmd = new OleDbCommand("SELECT Password, CustomerID FROM CUSTOMER WHERE Username = '"+Username +"';",conn); // Selects the password and CustomerID of the user
                 reader = cmd.ExecuteReader();
                 reader.Read();
 
-                string hashedP = reader[0].ToString();               
-            
+                //----------------------------------------------------------------------------------------------
+                
+                string hashedP = reader[0].ToString(); // The hashed password is read from the table and converted to a byte array               
                 byte[] hashBytes = Convert.FromBase64String(hashedP);
                 byte[] salt = new byte[16];
                 Array.Copy(hashBytes, 0, salt, 0, 16);
-                var pbkdf2 = new Rfc2898DeriveBytes(Password,salt,10000);
-                byte[] hash = pbkdf2.GetBytes(20); //https://medium.com/@mehanix/lets-talk-security-salted-password-hashing-in-c-5460be5c3aae
-               
+                var pbkdf2 = new Rfc2898DeriveBytes(Password,salt,10000); // The entered password is hashed with the same salt
+                byte[] hash = pbkdf2.GetBytes(20); 
+                //----------------------------------------------------------------------------------------------                                  
 
                 bool pass = true;
-                for (int i=0; i<20; i++)
+                for (int i=0; i<20; i++) // The byte arrays are checked against each other to determine if the passwords match
                 {
                     if (hashBytes[i + 16] != hash[i])
                     {
@@ -155,9 +153,9 @@ namespace Project
                 }
                 if (pass == true)
                 {
-                    getID = Convert.ToInt32(reader[1].ToString());
+                    getID = Convert.ToInt32(reader[1].ToString()); // The users ID is stored
                     conn.Close();
-                    ButtonWasClicked();                                                       
+                    ButtonWasClicked(); // Subroutine is called             
                 }
                 else
                 {
@@ -166,10 +164,8 @@ namespace Project
                 conn.Close();
             }
         }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
         //----------------------------------------------------------------------------------------------       
     }

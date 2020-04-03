@@ -19,24 +19,16 @@ namespace Project
     public partial class Signup : Form
     {
 
-        public delegate void ClickButton();
+        public delegate void ClickButton();  // Points towards the ButtonWasClicked event in the Main Form
         public event ClickButton ButtonWasClicked;
-        public int getID;
+        public int getID; // Variable to get the users ID once they have signed in
 
-        // string FormID = string.Empty;
-        //OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
-
-        //public delegate void SignSuccess(); 
-        //public event SignSuccess SignWasSuccess;
-
-        private OleDbConnection Conn; 
+        private OleDbConnection Conn;
 
         public Signup(OleDbConnection Con)
         {
-            //conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Gouldie\source\repos\GouIdie\ye\Project\Project\ProjectData.accdb");
             InitializeComponent();
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            Conn = Con;
+            Conn = Con; // The connection string is passed from the Main form
         }
 
         public void Simulation_Load(object sender, EventArgs e)
@@ -65,13 +57,13 @@ namespace Project
         }
 
         //----------------------------------------------------------------------------------------------
-        public bool Uempty = true;
+        public bool Uempty = true; // On startup, The username text box is empty
         private void UsernameTB_TextChanged(object sender, EventArgs e) //UsernameTB
         {   
         }
         private void UsernameTB_Enter(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(UsernameTB.Text) || (Uempty == true))
+            if (string.IsNullOrWhiteSpace(UsernameTB.Text) || (Uempty == true)) // If the textbox is empty when leaving the textbox, It is filled with the original instruction
             {
                 UsernameTB.Clear();
             }
@@ -80,7 +72,7 @@ namespace Project
         }
         private void UsernameTB_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(UsernameTB.Text))
+            if (string.IsNullOrWhiteSpace(UsernameTB.Text)) // If the textbox is empty when leaving the textbox, It is filled with the original instruction
             {
                
                 UsernameTB.Text = "Username";
@@ -97,24 +89,24 @@ namespace Project
 
         //----------------------------------------------------------------------------------------------
 
-        public bool Pempty = true;
+        public bool Pempty = true; // On startup, The password text box is empty
         private void PasswordTB_TextChanged(object sender, EventArgs e) //PasswordTB
         {  
         }
         private void PasswordTB_Enter(object sender, EventArgs e) //PasswordTB
         {
-            if (string.IsNullOrWhiteSpace(PasswordTB.Text) || (Pempty == true))
+            if (string.IsNullOrWhiteSpace(PasswordTB.Text) || (Pempty == true)) // If there is no text in the textbox or the inital message is there, the text box is cleared
             {                
                 PasswordTB.Clear();                
             }
-            PasswordTB.PasswordChar = '●';
+            PasswordTB.PasswordChar = '●'; // The password characters are set to hide the data as the user inputs it
             PasswordTB.ForeColor = SystemColors.WindowText;
         }
         private void PasswordTB_Leave(object sender, EventArgs e) //PasswordTB
         {
             if (string.IsNullOrWhiteSpace(PasswordTB.Text))
             {
-                PasswordTB.PasswordChar = '\0';
+                PasswordTB.PasswordChar = '\0'; // If the textbox is empty when leaving the textbox, It is filled with the original instruction
                 PasswordTB.Text = "Password";
                 PasswordTB.ForeColor = SystemColors.WindowFrame;
                 Pempty = true;
@@ -129,13 +121,13 @@ namespace Project
       
         //----------------------------------------------------------------------------------------------
        
-        public bool Eempty = true;
+        public bool Eempty = true; // On startup, The Email text box is empty
         private void EmailTB_TextChanged(object sender, EventArgs e) //EmailTB
         {
         }
         private void EmailTB_Enter(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(EmailTB.Text) || (Eempty == true))
+            if (string.IsNullOrWhiteSpace(EmailTB.Text) || (Eempty == true)) // If there is no text in the textbox or the inital message is there, the text box is cleared
             {
                 EmailTB.Clear();
             }
@@ -145,9 +137,8 @@ namespace Project
 
         private void EmailTB_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(EmailTB.Text))
+            if (string.IsNullOrWhiteSpace(EmailTB.Text)) // If the textbox is empty when leaving the textbox, It is filled with the original instruction
             {
-                EmailTB.PasswordChar = '\0';
                 EmailTB.Text = "Email";
                 EmailTB.ForeColor = SystemColors.WindowFrame;
                 Eempty = true;
@@ -167,19 +158,19 @@ namespace Project
             {               
                 string Username = UsernameTB.Text;
                 int Ulength = Username.Length;
-                if (Ulength < 3 || Ulength > 32)
+                if (Ulength < 3 || Ulength > 32) // The username length is validated
                 {
-                    MessageBox.Show("Username is not long enough");
+                    MessageBox.Show("Username shoule be between 3 and 32 characters long");
                 }
                 else
                 {
-                        OleDbDataAdapter UdataAdapter = new OleDbDataAdapter("select Username from Customer", Conn);
+                        OleDbDataAdapter UdataAdapter = new OleDbDataAdapter("select Username from Customer", Conn); // All usernames are selected from the table
                         DataSet ds = new DataSet();
                         UdataAdapter.Fill(ds, "Customer");
                         bool Ufound=false;
                     foreach (DataRow dataRow in ds.Tables[0].Rows)
                     {
-                        if (dataRow["Username"].ToString() == Username)
+                        if (dataRow["Username"].ToString() == Username) // The username is checked to make sure it does not already exist
                         {                           
                             Ufound = true;
                             break;
@@ -196,10 +187,11 @@ namespace Project
                     }
                     else
                     {
-
+                        //----------------------------------------------------------------------------------------------
+                        // The password is validated to be of the required complexity
                         string Password = PasswordTB.Text;
 
-                        Regex hasNumber = new Regex(@"[0-9]+");
+                        Regex hasNumber = new Regex(@"[0-9]+"); 
                         Regex hasUpperChar = new Regex(@"[A-Z]+");
                         Regex hasMiniMaxChars = new Regex(@".{8,15}");
                         Regex hasLowerChar = new Regex(@"[a-z]+");
@@ -241,12 +233,13 @@ namespace Project
                             MessageBox.Show("Password should contain at least one special case characters");
 
                         }
+                        //----------------------------------------------------------------------------------------------
                         else
                         {
                             //----------------------------------------------------------------------------------------------
-
+                            // The password is hashed and stored with the salt
                             byte[] salt;
-                            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);////////////////////////////////////
+                            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
                             var pbkdf2 = new Rfc2898DeriveBytes(Password,salt,10000);
                             byte[] hash = pbkdf2.GetBytes(20);
                             byte[] hashBytes = new byte[36];
@@ -257,7 +250,7 @@ namespace Project
 
                             //----------------------------------------------------------------------------------------------
 
-                            string Email = EmailTB.Text;
+                            string Email = EmailTB.Text; // The email is validated be in the correct format
                             Regex ValEmail = new Regex(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*" + "@" + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$");
                             if (!ValEmail.IsMatch(Email))
                             {
@@ -266,12 +259,12 @@ namespace Project
                             else
                             {
 
-                                OleDbDataAdapter EdataAdapter = new OleDbDataAdapter("select Email from Customer", Conn);                               
+                                OleDbDataAdapter EdataAdapter = new OleDbDataAdapter("select Email from Customer", Conn); // Selects all email from the table                               
                                 EdataAdapter.Fill(ds, "Customer");
                                 bool Efound = false;
                                 foreach (DataRow dataRow in ds.Tables[0].Rows)
                                 {
-                                    if (dataRow["Email"].ToString() == Email)
+                                    if (dataRow["Email"].ToString() == Email) // Checks the email is not already in use
                                     {
                                         Efound = true;
                                         break;
@@ -289,8 +282,8 @@ namespace Project
                                 else 
                                 { 
 
-
-                                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @SavedPassword, @Email)");
+                                 // Data is inputted into the table
+                                OleDbCommand cmd = new OleDbCommand("INSERT into Customer (Username,[Password],Email) Values(@Username, @SavedPassword, @Email)"); 
                                 cmd.Connection = Conn;
                  
                                 Conn.Open();
@@ -315,10 +308,10 @@ namespace Project
                                             OleDbCommand Getid = new OleDbCommand("SELECT CustomerID FROM CUSTOMER WHERE Username = '" + Username + "';", Conn);
                                             reader = Getid.ExecuteReader();
                                             reader.Read();
-                                            getID = Convert.ToInt32(reader[0].ToString());
+                                            getID = Convert.ToInt32(reader[0].ToString()); // The customerID is stored as a variable
                                             Conn.Close();
 
-                                            ButtonWasClicked();
+                                            ButtonWasClicked(); // Calls the subroutine
 
                                         }
                                     catch (OleDbException ex)
@@ -339,35 +332,6 @@ namespace Project
                     }
                 }
             }
-        }
-        //----------------------------------------------------------------------------------------------
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.Clear();
-            OleDbDataAdapter dataAdapter = new OleDbDataAdapter("select Username from Customer", Conn);
-            DataSet ds = new DataSet();
-            dataAdapter.Fill(ds, "Customer");
-            foreach (DataRow dataRow in ds.Tables[0].Rows)
-            {
-                listBox1.Items.Add(dataRow["Username"].ToString());
-            }
-            Conn.Close();
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        
-        private void button1_Click(object sender, EventArgs e)
-        {
-           
         }
     }
 }

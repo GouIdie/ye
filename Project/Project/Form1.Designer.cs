@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -45,7 +43,6 @@
             this.projectDataDataSet = new Project.ProjectDataDataSet();
             this.projectDataDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.customerTableAdapter1 = new Project.ProjectDataDataSetTableAdapters.CustomerTableAdapter();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.projectDataDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.projectDataDataSetBindingSource)).BeginInit();
@@ -63,33 +60,11 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(47)))));
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.listBox1);
             this.panel2.Location = new System.Drawing.Point(205, 28);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(753, 460);
             this.panel2.TabIndex = 1;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
-            // button2
-            // 
-            this.button2.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.button2.Location = new System.Drawing.Point(518, 291);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(158, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(518, 174);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(158, 95);
-            this.listBox1.TabIndex = 4;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // panel3
             // 
@@ -237,7 +212,6 @@
             this.Text = "Simulation";
             this.Load += new System.EventHandler(this.Simulation_Load);
             this.Leave += new System.EventHandler(this.PasswordTB_Leave);
-            this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.projectDataDataSet)).EndInit();
@@ -256,8 +230,6 @@
         private System.Windows.Forms.TextBox UsernameTB;
         private System.Windows.Forms.BindingSource projectDataDataSetBindingSource;
         private ProjectDataDataSet projectDataDataSet;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox PasswordTB;
         private ProjectDataDataSetTableAdapters.CustomerTableAdapter customerTableAdapter1;
         private System.Windows.Forms.Panel panel4;
